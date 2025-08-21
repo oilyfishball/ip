@@ -1,36 +1,42 @@
 package Package;
 
-import java.util.Scanner;
-
 public class Store {
-    public static void store() {
-        Scanner userInput = new Scanner(System.in);
-        String[] tasks = new String[100];
-        int idx = 0;
+    private Task[] tasks = new Task[100];
+    private int idx = 0;
 
-        while (true) {
-            String input = userInput.nextLine();
-
-            if (input.equals("bye")) {
+    public void list() {
+        System.out.println("Here are the tasks in your list: ");
+        for (int i = 0; i < this.tasks.length; i++) {
+            if (this.tasks[i] == null) {
                 break;
-            } else if (input.equals("list")) {
-                Global.printline();
-                for (int i = 0; i < tasks.length; i++) {
-                    if (tasks[i] == null) {
-                        break;
-                    }
-                    int curr = i + 1;
-                    System.out.println(curr + ". " + tasks[i]);
-                }
-                Global.printline();
-            } else {
-                tasks[idx] = input;
-                idx += 1;
-
-                Global.printline();
-                System.out.println("added: " + input);
-                Global.printline();
             }
+            int curr = i + 1;
+
+            System.out.println(curr + ". " + this.tasks[i]);
         }
+    }
+
+    public void store(String input) {
+        Task task = new Task(input);
+        this.tasks[this.idx] = task;
+        this.idx += 1;
+
+        System.out.println("added: " + input);
+    }
+
+    public void mark(int i) {
+        int id = i - 1;
+        Task currTask = tasks[id];
+        currTask.markAsDone();
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(currTask.toString());
+    }
+
+    public void unmark(int i) {
+        int id = i - 1;
+        Task currTask = tasks[id];
+        currTask.markAsUndone();
+        System.out.println("Ok, I've marked this task as not done yet: ");
+        System.out.println(currTask.toString());
     }
 }
