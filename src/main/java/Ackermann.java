@@ -46,7 +46,7 @@ public class Ackermann {
                         storage.addevent(words[1]);
                         break;
                     default:
-                        storage.store(input);
+//                        storage.store(input);
                         break;
                 }
             }

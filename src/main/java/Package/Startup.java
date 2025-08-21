@@ -13,7 +13,7 @@ public class Startup {
     }
 
     public static String get_end() {
-        return Global.getline() + " \n" + Startup.end_message + "\n" + Global.getline();    }
+        return "\n" + Startup.end_message + "\n" + Global.getline();    }
 
     public static void print_end() {
         System.out.println(Startup.get_end());
