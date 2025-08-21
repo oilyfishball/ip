@@ -1,6 +1,6 @@
-package Exceptions.Mark;
+package Exceptions;
 
-public class InvalidTargetException extends Exception {
+public class InvalidTargetException extends CheckedException {
     public InvalidTargetException() {
         super("Unable to locate task!");
     }

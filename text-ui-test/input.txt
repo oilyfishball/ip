@@ -1,4 +1,5 @@
 test
+delete 1
 todo
 todo borrow book
 deadline
@@ -17,4 +18,6 @@ mark 4
 unmark 4
 unmark 3
 list
+delete
+delete 3
 bye

@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class InvalidCodeException extends Exception{
+public class InvalidCodeException extends CheckedException{
     public InvalidCodeException() {
         super("No Such Codeword!");
     }

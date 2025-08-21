@@ -6,10 +6,13 @@ What can I do for you?
 No Such Codeword!
 -----------------------------------------------------
 -----------------------------------------------------
+Unable to locate task!
+-----------------------------------------------------
+-----------------------------------------------------
 Description of todo cannot be empty!
 -----------------------------------------------------
 -----------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this ToDo:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
 -----------------------------------------------------
@@ -22,7 +25,7 @@ Please include the deadline using /by.
 E.g. deadline return book /by Sunday
 -----------------------------------------------------
 -----------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this Deadline:
 [D][ ] return book  (by sunday)
 Now you have 2 tasks in the list.
 -----------------------------------------------------
@@ -41,7 +44,7 @@ Please include /to
 E.g. event project meeting /from Mon 2pm /to 4pm
 -----------------------------------------------------
 -----------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this Event:
 [E][ ] project meeting (from: Mon 2pm  to: 4pm)
 Now you have 3 tasks in the list.
 -----------------------------------------------------
@@ -56,8 +59,7 @@ Invalid Selection.
 E.g. mark 1, unmark 1
 -----------------------------------------------------
 -----------------------------------------------------
-Invalid Selection.
-E.g. mark 1, unmark 1
+Unable to locate task!
 -----------------------------------------------------
 -----------------------------------------------------
 Nice! I've marked this task as done:
@@ -82,6 +84,15 @@ Here are the tasks in your list:
 1. [T][ ] borrow book
 2. [D][X] return book  (by sunday)
 3. [E][ ] project meeting (from: Mon 2pm  to: 4pm)
+-----------------------------------------------------
+-----------------------------------------------------
+Invalid Selection.
+E.g. delete 1
+-----------------------------------------------------
+-----------------------------------------------------
+Noted, I've removed this task:
+[E][ ] project meeting (from: Mon 2pm  to: 4pm)
+Now you have 2 tasks in the list.
 -----------------------------------------------------
 -----------------------------------------------------
 

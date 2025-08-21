@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
+import Exceptions.CheckedException;
 import Exceptions.InvalidCodeException;
+import Exceptions.InvalidDeleteException;
 import Exceptions.Mark.InvalidMarkException;
-import Exceptions.Mark.InvalidTargetException;
 import Exceptions.Task.InvalidDeadline.InvalidDeadlineException;
 import Exceptions.Task.InvalidEvent.InvalidEventException;
-import Exceptions.Task.InvalidTaskException;
 import Exceptions.Task.InvalidTodo.InvalidTodoException;
 import Package.*;
 
@@ -20,6 +20,7 @@ public class Ackermann {
         while (true) {
             try {
                 String input = scanner.nextLine();
+                String[] words = input.split(" ", 2);
 
                 Global.printline();
                 if (input.equals("bye")) {
@@ -28,10 +29,9 @@ public class Ackermann {
                 } else if (input.equals("list")) {
                     //Level-2
                     storage.list();
-                } else if (input.contains("mark")) {
+                } else if (words[0].contains("mark")) {
                     //Level-3
                     try {
-                        String[] words = input.split(" ");
                         int target = parseInt(words[1]);
                         String mark = words[0];
 
@@ -39,14 +39,21 @@ public class Ackermann {
                             storage.mark(target);
                         } else if (mark.equals("unmark")) {
                             storage.unmark(target);
+                        } else {
+                            throw new InvalidCodeException();
                         }
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                         throw new InvalidMarkException();
                     }
+                } else if (words[0].equals("delete")) {
+                    try {
+                        int target = parseInt(words[1]);
+                        storage.delete(target);
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                        throw new InvalidDeleteException();
+                    }
                 } else {
 //                Echo.echo(input);
-                    String[] words = input.split(" ", 2);
-
                     switch (words[0]) {
                         case "todo":
                             if (words.length == 1 || words[1].isEmpty()) {
@@ -74,7 +81,7 @@ public class Ackermann {
                 Global.printline();
             }
 
-            catch (InvalidCodeException | InvalidTaskException | InvalidMarkException | InvalidTargetException e) {
+            catch (CheckedException e) {
                 System.out.println(e.getMessage());
                 Global.printline();
             }
