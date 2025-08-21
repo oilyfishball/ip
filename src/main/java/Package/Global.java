@@ -1,4 +1,4 @@
-package Package.Global;
+package Package;
 
 public class Global {
     private static String line = "-----------------------------------------------------";

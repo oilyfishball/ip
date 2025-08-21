@@ -1,7 +1,6 @@
-package Package.Echo;
+package Package;
 
 import java.util.Scanner;
-import Package.Global.*;
 
 public class Echo {
     public static void echo() {

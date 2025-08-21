@@ -1,8 +1,5 @@
-import Package.Startup.*;
-import Package.Echo.*;
-import Package.Global.*;
-
 import java.util.Scanner;
+import Package.*;
 
 public class Ackermann {
     public static void startup() {
@@ -10,11 +7,10 @@ public class Ackermann {
     }
 
     public static void main(String[] args) {
-        Scanner userInput = new Scanner(System.in);
-
         Startup.print_startup();
 
-        Echo.echo();
+//        Echo.echo();
+        Store.store();
 
         Startup.print_end();
     }

@@ -1,6 +1,4 @@
-package Package.Startup;
-
-import Package.Global.Global;
+package Package;
 
 public class Startup {
     private static String startup_message = "Hello! I'm Ackermann\nWhat can I do for you?";
