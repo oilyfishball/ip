@@ -1,14 +1,21 @@
 import Package.Startup.*;
+import Package.Echo.*;
+import Package.Global.*;
+
+import java.util.Scanner;
 
 public class Ackermann {
-    public static void printline() {
-        System.out.println("-----------------------------------------------------");
+    public static void startup() {
+
     }
+
     public static void main(String[] args) {
-        Ackermann.printline();
-        System.out.println(Startup.get_startup());
-        Ackermann.printline();
-        System.out.println(Startup.get_end());
-        Ackermann.printline();
+        Scanner userInput = new Scanner(System.in);
+
+        Startup.print_startup();
+
+        Echo.echo();
+
+        Startup.print_end();
     }
 }
