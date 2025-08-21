@@ -1,4 +1,12 @@
 import java.util.Scanner;
+
+import Exceptions.InvalidCodeException;
+import Exceptions.Mark.InvalidMarkException;
+import Exceptions.Mark.InvalidTargetException;
+import Exceptions.Task.InvalidDeadline.InvalidDeadlineException;
+import Exceptions.Task.InvalidEvent.InvalidEventException;
+import Exceptions.Task.InvalidTaskException;
+import Exceptions.Task.InvalidTodo.InvalidTodoException;
 import Package.*;
 
 import static java.lang.Integer.parseInt;
@@ -10,47 +18,66 @@ public class Ackermann {
 
         Startup.print_startup();
         while (true) {
-            String input = scanner.nextLine();
+            try {
+                String input = scanner.nextLine();
 
-            Global.printline();
-            if (input.equals("bye")) {
-                //Level-1
-                break;
-            } else if (input.equals("list")) {
-                //Level-2
-                storage.list();
-            } else if (input.contains("mark")) {
-                //Level-3
-                String[] words = input.split(" ");
-                int target = parseInt(words[1]);
-                String mark = words[0];
+                Global.printline();
+                if (input.equals("bye")) {
+                    //Level-1
+                    break;
+                } else if (input.equals("list")) {
+                    //Level-2
+                    storage.list();
+                } else if (input.contains("mark")) {
+                    //Level-3
+                    try {
+                        String[] words = input.split(" ");
+                        int target = parseInt(words[1]);
+                        String mark = words[0];
 
-                if (mark.equals("mark")) {
-                    storage.mark(target);
-                } else if (mark.equals("unmark")) {
-                    storage.unmark(target);
-                }
-            }
-            else {
+                        if (mark.equals("mark")) {
+                            storage.mark(target);
+                        } else if (mark.equals("unmark")) {
+                            storage.unmark(target);
+                        }
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                        throw new InvalidMarkException();
+                    }
+                } else {
 //                Echo.echo(input);
-                String[] words = input.split(" ", 2);
+                    String[] words = input.split(" ", 2);
 
-                switch (words[0]) {
-                    case "todo":
-                        storage.addtoDo(words[1]);
-                        break;
-                    case "deadline":
-                        storage.adddeadline(words[1]);
-                        break;
-                    case "event":
-                        storage.addevent(words[1]);
-                        break;
-                    default:
+                    switch (words[0]) {
+                        case "todo":
+                            if (words.length == 1 || words[1].isEmpty()) {
+                                throw new InvalidTodoException();
+                            }
+                            storage.addtoDo(words[1]);
+                            break;
+                        case "deadline":
+                            if (words.length == 1 || words[1].isEmpty()) {
+                                throw new InvalidDeadlineException();
+                            }
+                            storage.adddeadline(words[1]);
+                            break;
+                        case "event":
+                            if (words.length == 1 || words[1].isEmpty()) {
+                                throw new InvalidEventException();
+                            }
+                            storage.addevent(words[1]);
+                            break;
+                        default:
 //                        storage.store(input);
-                        break;
+                            throw new InvalidCodeException();
+                    }
                 }
+                Global.printline();
             }
-            Global.printline();
+
+            catch (InvalidCodeException | InvalidTaskException | InvalidMarkException | InvalidTargetException e) {
+                System.out.println(e.getMessage());
+                Global.printline();
+            }
         }
         Startup.print_end();
     }

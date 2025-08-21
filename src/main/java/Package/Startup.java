@@ -5,7 +5,7 @@ public class Startup {
     private static String end_message = "Bye. Hope to see you again soon!";
 
     public static String get_startup() {
-        return Global.getline() + " \n" + Startup.startup_message + "\n" + Global.getline();
+        return Global.getline() + "\n" + Startup.startup_message + "\n" + Global.getline();
     }
 
     public static void print_startup() {

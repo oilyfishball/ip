@@ -3,18 +3,42 @@ Hello! I'm Ackermann
 What can I do for you?
 -----------------------------------------------------
 -----------------------------------------------------
+No Such Codeword!
+-----------------------------------------------------
+-----------------------------------------------------
+Description of todo cannot be empty!
+-----------------------------------------------------
+-----------------------------------------------------
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
 -----------------------------------------------------
 -----------------------------------------------------
-Here are the tasks in your list:
-1. [T][ ] borrow book
+Invalid Deadline Input!
+-----------------------------------------------------
+-----------------------------------------------------
+Invalid Deadline Input!
+Please include the deadline using /by.
+E.g. deadline return book /by Sunday
 -----------------------------------------------------
 -----------------------------------------------------
 Got it. I've added this task:
-[D][ ] return book  (by Sunday)
+[D][ ] return book  (by sunday)
 Now you have 2 tasks in the list.
+-----------------------------------------------------
+-----------------------------------------------------
+Invalid Event Input!
+E.g. event project meeting /from Mon 2pm /to 4pm
+-----------------------------------------------------
+-----------------------------------------------------
+Invalid Event Input!
+Please include /from
+E.g. event project meeting /from Mon 2pm /to 4pm
+-----------------------------------------------------
+-----------------------------------------------------
+Invalid Event Input!
+Please include /to
+E.g. event project meeting /from Mon 2pm /to 4pm
 -----------------------------------------------------
 -----------------------------------------------------
 Got it. I've added this task:
@@ -24,31 +48,39 @@ Now you have 3 tasks in the list.
 -----------------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book  (by Sunday)
+2. [D][ ] return book  (by sunday)
 3. [E][ ] project meeting (from: Mon 2pm  to: 4pm)
 -----------------------------------------------------
 -----------------------------------------------------
-Nice! I've marked this task as done:
-[T][X] borrow book
+Invalid Selection.
+E.g. mark 1, unmark 1
+-----------------------------------------------------
+-----------------------------------------------------
+Invalid Selection.
+E.g. mark 1, unmark 1
 -----------------------------------------------------
 -----------------------------------------------------
 Nice! I've marked this task as done:
-[D][X] return book  (by Sunday)
+[D][X] return book  (by sunday)
 -----------------------------------------------------
 -----------------------------------------------------
-Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][X] return book  (by Sunday)
-3. [E][ ] project meeting (from: Mon 2pm  to: 4pm)
+Nice! I've marked this task as done:
+[E][X] project meeting (from: Mon 2pm  to: 4pm)
+-----------------------------------------------------
+-----------------------------------------------------
+Unable to locate task!
+-----------------------------------------------------
+-----------------------------------------------------
+Unable to locate task!
 -----------------------------------------------------
 -----------------------------------------------------
 Ok, I've marked this task as not done yet:
-[T][ ] borrow book
+[E][ ] project meeting (from: Mon 2pm  to: 4pm)
 -----------------------------------------------------
 -----------------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][X] return book  (by Sunday)
+2. [D][X] return book  (by sunday)
 3. [E][ ] project meeting (from: Mon 2pm  to: 4pm)
 -----------------------------------------------------
 -----------------------------------------------------
