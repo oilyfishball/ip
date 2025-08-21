@@ -14,10 +14,13 @@ public class Ackermann {
 
             Global.printline();
             if (input.equals("bye")) {
+                //Level-1
                 break;
             } else if (input.equals("list")) {
+                //Level-2
                 storage.list();
             } else if (input.contains("mark")) {
+                //Level-3
                 String[] words = input.split(" ");
                 int target = parseInt(words[1]);
                 String mark = words[0];
@@ -30,7 +33,22 @@ public class Ackermann {
             }
             else {
 //                Echo.echo(input);
-                storage.store(input);
+                String[] words = input.split(" ", 2);
+
+                switch (words[0]) {
+                    case "todo":
+                        storage.addtoDo(words[1]);
+                        break;
+                    case "deadline":
+                        storage.adddeadline(words[1]);
+                        break;
+                    case "event":
+                        storage.addevent(words[1]);
+                        break;
+                    default:
+                        storage.store(input);
+                        break;
+                }
             }
             Global.printline();
         }

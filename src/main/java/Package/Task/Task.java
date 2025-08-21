@@ -1,4 +1,4 @@
-package Package;
+package Package.Task;
 
 public class Task {
     private boolean done;

@@ -1,5 +1,10 @@
 package Package;
 
+import Package.Task.Deadlines;
+import Package.Task.Events;
+import Package.Task.Task;
+import Package.Task.ToDos;
+
 public class Store {
     private Task[] tasks = new Task[100];
     private int idx = 0;
@@ -39,4 +44,36 @@ public class Store {
         System.out.println("Ok, I've marked this task as not done yet: ");
         System.out.println(currTask.toString());
     }
+
+    public void printAdd(Task task) {
+        System.out.println("Got it. I've added this task: \n" + task + "\nNow you have " + this.idx + " tasks in the list.");
+    }
+    public void addtoDo(String input) {
+        Task toDo = new ToDos(input);
+        this.tasks[this.idx] = toDo;
+        this.idx += 1;
+
+        this.printAdd(toDo);
+    }
+
+    public void adddeadline(String input) {
+        String[] info = input.split("/by ", 2);
+        Task deadline = new Deadlines(info[0], info[1]);
+        this.tasks[this.idx] = deadline;
+        this.idx += 1;
+
+        this.printAdd(deadline);
+    }
+
+    public void addevent(String input) {
+        String[] info = input.split("/from ", 2);
+        String[] info2 = info[1].split("/to ", 2);
+        Task event = new Events(info[0], info2[0], info2[1]);
+        this.tasks[this.idx] = event;
+        this.idx += 1;
+
+        this.printAdd(event);
+    }
+
+
 }
