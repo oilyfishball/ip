@@ -2,6 +2,8 @@
 Hello! I'm Ackermann
 What can I do for you?
 -----------------------------------------------------
+Here are the tasks in your list:
+-----------------------------------------------------
 -----------------------------------------------------
 No Such Codeword!
 -----------------------------------------------------
@@ -26,7 +28,7 @@ E.g. deadline return book /by Sunday
 -----------------------------------------------------
 -----------------------------------------------------
 Got it. I've added this Deadline:
-[D][ ] return book  (by sunday)
+[D][ ] return book (by sunday)
 Now you have 2 tasks in the list.
 -----------------------------------------------------
 -----------------------------------------------------
@@ -45,14 +47,14 @@ E.g. event project meeting /from Mon 2pm /to 4pm
 -----------------------------------------------------
 -----------------------------------------------------
 Got it. I've added this Event:
-[E][ ] project meeting (from: Mon 2pm  to: 4pm)
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
 Now you have 3 tasks in the list.
 -----------------------------------------------------
 -----------------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book  (by sunday)
-3. [E][ ] project meeting (from: Mon 2pm  to: 4pm)
+2. [D][ ] return book (by sunday)
+3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 -----------------------------------------------------
 -----------------------------------------------------
 Invalid Selection.
@@ -63,11 +65,11 @@ Unable to locate task!
 -----------------------------------------------------
 -----------------------------------------------------
 Nice! I've marked this task as done:
-[D][X] return book  (by sunday)
+[D][X] return book (by sunday)
 -----------------------------------------------------
 -----------------------------------------------------
 Nice! I've marked this task as done:
-[E][X] project meeting (from: Mon 2pm  to: 4pm)
+[E][X] project meeting (from: Mon 2pm to: 4pm)
 -----------------------------------------------------
 -----------------------------------------------------
 Unable to locate task!
@@ -77,13 +79,13 @@ Unable to locate task!
 -----------------------------------------------------
 -----------------------------------------------------
 Ok, I've marked this task as not done yet:
-[E][ ] project meeting (from: Mon 2pm  to: 4pm)
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
 -----------------------------------------------------
 -----------------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][X] return book  (by sunday)
-3. [E][ ] project meeting (from: Mon 2pm  to: 4pm)
+2. [D][X] return book (by sunday)
+3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 -----------------------------------------------------
 -----------------------------------------------------
 Invalid Selection.
@@ -91,7 +93,7 @@ E.g. delete 1
 -----------------------------------------------------
 -----------------------------------------------------
 Noted, I've removed this task:
-[E][ ] project meeting (from: Mon 2pm  to: 4pm)
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
 Now you have 2 tasks in the list.
 -----------------------------------------------------
 -----------------------------------------------------

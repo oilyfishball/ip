@@ -1,6 +1,4 @@
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,10 +15,8 @@ import mypackage.*;
 import static java.lang.Integer.parseInt;
 
 public class Ackermann {
-    private static final Path FILEPATH = Paths.get(".", "src", "main", "java", "test.txt");
-
     private enum Codewords {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, SAVE;
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT;
 
         public static Codewords check(String x) throws InvalidCodeException {
             try {
@@ -37,38 +33,48 @@ public class Ackermann {
 
     private static void startUp(Store storage) throws CheckedException{
         try {
-            Scanner fileIn = new Scanner(new File(String.valueOf(FILEPATH)));
+            Scanner fileIn = new Scanner(new File(String.valueOf(Global.FILEPATH)));
+            int curr = 1;
+
             while (fileIn.hasNext()) {
-                String[] taskStr = fileIn.nextLine().split(" | ", 2);
+                String next = fileIn.nextLine();
+                //scans next line
+                String[] taskStr = next.split(" \\| ");
                 String type = taskStr[0];
-                String value = taskStr[1];
+                boolean status = taskStr[1].equals("1");
+                String value = taskStr[2];
                 switch (type) {
                 case "T":
                     storage.addToDo(value, false);
+                    if (status) storage.mark(curr, false);
                     break;
                 case "D":
                     storage.addDeadline(value, false);
+                    if (status) storage.mark(curr, false);
                     break;
                 case "E":
                     storage.addEvent(value, false);
+                    if (status) storage.mark(curr, false);
                     break;
                 default:
                     throw new InvalidCodeException();
                 }
+                curr += 1;
             }
-            storage.list();
-            Global.printline();
         } catch (FileNotFoundException e) {
-            File newFile = new File(String.valueOf(FILEPATH));
+            File newFile = new File(String.valueOf(Global.FILEPATH));
             try {
                 boolean success = newFile.createNewFile();
             } catch (IOException ex) {
-                System.out.println("Nope");
+                System.out.println("Error creating new file!");
             }
+        } finally {
+            storage.list();
+            Global.printline();
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Store storage = new Store();
         boolean run = true;
@@ -137,8 +143,6 @@ public class Ackermann {
                     }
                     storage.addEvent(words[1]);
                     break;
-                case SAVE:
-
                 default:
 //                        storage.store(input);
                     throw new InvalidCodeException();

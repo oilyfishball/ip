@@ -10,6 +10,10 @@ public class Deadlines extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by " + this.by + ")";
+        return "[D]" + super.toString() + "(by " + this.by + ")";
+    }
+
+    public String getBy() {
+        return this.by;
     }
 }

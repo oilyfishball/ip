@@ -21,6 +21,10 @@ public class Task {
         this.done = false;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatus() + "] " + this.name;
