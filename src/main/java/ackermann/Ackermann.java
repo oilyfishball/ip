@@ -15,6 +15,10 @@ public class Ackermann {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for chatbot
+     * @param filePath filepath of saved tasks
+     */
     public Ackermann(Path filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -27,6 +31,9 @@ public class Ackermann {
         }
     }
 
+    /**
+     * Runs the chatbot
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser(this.ui, this.tasks);

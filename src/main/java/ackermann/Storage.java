@@ -142,8 +142,11 @@ public class Storage {
         }
     }
 
-    //======================Saving Info to tasks.txt=======================================
 
+    /**
+     * Saves tasks to a file
+     * @param tasks information to save to the file
+     */
     public void save(TaskList tasks) {
         StringBuilder str = new StringBuilder();
 
@@ -165,6 +168,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Used for save method to get the string to save to file
+     * @param currTask task to stringify
+     * @return stringified task
+     */
     private String getString(Task currTask) {
         boolean status = currTask.getStatus().equals("X");
         String tempStr = "";

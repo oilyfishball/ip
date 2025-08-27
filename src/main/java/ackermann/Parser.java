@@ -30,11 +30,22 @@ public class Parser {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor of Parser
+     * @param ui UI to use for chatbot operations
+     * @param tasks task list to update to/ retrieve info from
+     */
     public Parser(Ui ui, TaskList tasks) {
         this.ui = ui;
         this.tasks = tasks;
     }
 
+    /**
+     * Parses the codeword and details to perform operation
+     * @param input
+     * @return A boolean on whether or not the program should terminate
+     * @throws CheckedException
+     */
     public boolean parse(String input) throws CheckedException {
         String[] words = input.split(" ", 2);
         Parser.Codewords codeword = Parser.Codewords.check(words[0]);
