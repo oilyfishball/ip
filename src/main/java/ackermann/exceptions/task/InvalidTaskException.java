@@ -1,6 +1,6 @@
-package exceptions.task;
+package ackermann.exceptions.task;
 
-import exceptions.CheckedException;
+import ackermann.exceptions.CheckedException;
 
 public class InvalidTaskException extends CheckedException {
     public InvalidTaskException(String message) {

@@ -1,6 +1,6 @@
-package exceptions.task.InvalidDeadline;
+package ackermann.exceptions.task.InvalidDeadline;
 
-import exceptions.task.InvalidTaskException;
+import ackermann.exceptions.task.InvalidTaskException;
 
 public class InvalidDeadlineException extends InvalidTaskException {
     //0 is no space, 1 is no /by

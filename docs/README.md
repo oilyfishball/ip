@@ -1,4 +1,4 @@
-# Ackermann User Guide
+# ackermann.ackermann User Guide
 
 // Update the title above to match the actual product name
 

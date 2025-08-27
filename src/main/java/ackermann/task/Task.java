@@ -1,4 +1,4 @@
-package mypackage.task;
+package ackermann.task;
 
 public class Task {
     private boolean done;

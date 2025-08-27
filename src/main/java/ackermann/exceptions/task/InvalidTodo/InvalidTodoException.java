@@ -1,6 +1,6 @@
-package exceptions.task.InvalidTodo;
+package ackermann.exceptions.task.InvalidTodo;
 
-import exceptions.task.InvalidTaskException;
+import ackermann.exceptions.task.InvalidTaskException;
 
 public class InvalidTodoException extends InvalidTaskException {
     public InvalidTodoException() {

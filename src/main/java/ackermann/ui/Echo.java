@@ -1,4 +1,4 @@
-package mypackage;
+package ackermann.ui;
 
 public class Echo {
     public static void echo(String input) {

@@ -1,4 +1,4 @@
-package exceptions;
+package ackermann.exceptions;
 
 public class InvalidTargetException extends CheckedException {
     public InvalidTargetException() {

@@ -1,6 +1,6 @@
-package mypackage;
+package ackermann.ui;
 
-import mypackage.task.Task;
+import ackermann.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;

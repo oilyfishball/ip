@@ -1,12 +1,12 @@
-package mypackage;
+package ackermann.ui;
 
-import exceptions.CheckedException;
-import exceptions.InvalidCodeException;
-import exceptions.InvalidDeleteException;
-import exceptions.mark.InvalidMarkException;
-import exceptions.task.InvalidDeadline.InvalidDeadlineException;
-import exceptions.task.InvalidEvent.InvalidEventException;
-import exceptions.task.InvalidTodo.InvalidTodoException;
+import ackermann.exceptions.CheckedException;
+import ackermann.exceptions.InvalidCodeException;
+import ackermann.exceptions.InvalidDeleteException;
+import ackermann.exceptions.mark.InvalidMarkException;
+import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineException;
+import ackermann.exceptions.task.InvalidEvent.InvalidEventException;
+import ackermann.exceptions.task.InvalidTodo.InvalidTodoException;
 
 import static java.lang.Integer.parseInt;
 

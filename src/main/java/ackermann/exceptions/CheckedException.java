@@ -1,4 +1,4 @@
-package exceptions;
+package ackermann.exceptions;
 
 public class CheckedException extends Exception {
     public CheckedException(String message) {

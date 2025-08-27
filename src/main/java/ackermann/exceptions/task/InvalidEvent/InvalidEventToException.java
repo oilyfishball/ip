@@ -1,4 +1,4 @@
-package exceptions.task.InvalidEvent;
+package ackermann.exceptions.task.InvalidEvent;
 
 public class InvalidEventToException extends InvalidEventException {
     public InvalidEventToException() {

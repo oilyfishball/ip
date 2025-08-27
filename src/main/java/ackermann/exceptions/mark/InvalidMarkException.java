@@ -1,6 +1,6 @@
-package exceptions.mark;
+package ackermann.exceptions.mark;
 
-import exceptions.CheckedException;
+import ackermann.exceptions.CheckedException;
 
 public class InvalidMarkException extends CheckedException {
     public InvalidMarkException() {
