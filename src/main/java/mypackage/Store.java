@@ -88,9 +88,17 @@ public class Store {
         }
     }
 
+    public void store(String input) {
+        Task task = new Task(input);
+        this.tasks.add(task);
+        System.out.println("added: " + input);
+    }
+
     public void printRemaining() {
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
     }
+
+    //======================Saving Info to tasks.txt=======================================
 
     public void save() {
         StringBuilder str = new StringBuilder();
@@ -128,18 +136,12 @@ public class Store {
             tempStr = "T" + tempStr;
         } else if (currTask instanceof Events) {
             Events tempTask = (Events) tasks.get(i);
-            tempStr = "E" + tempStr + "/from " + tempTask.getFrom() + " /to " + tempTask.getTo();
+            tempStr = "E" + tempStr + "/from " + tempTask.getSaveFrom() + " /to " + tempTask.getSaveTo();
         } else if (currTask instanceof Deadlines) {
             Deadlines tempTask = (Deadlines) tasks.get(i);
             tempStr = "D" + tempStr + "/by " + tempTask.getSaveBy();
         }
         return tempStr;
-    }
-
-    public void store(String input) {
-        Task task = new Task(input);
-        this.tasks.add(task);
-        System.out.println("added: " + input);
     }
 
     //==============================addToDo==================================================
@@ -198,14 +200,19 @@ public class Store {
         if (info2.length < 2) {
             throw new InvalidEventToException();
         }
+        try {
+            LocalDate from = LocalDate.parse(info2[0]);
+            LocalDate to = LocalDate.parse(info2[1]);
+            Task event = new Events(info[0], from, to);
+            this.tasks.add(event);
+            save();
 
-        Task event = new Events(info[0], info2[0], info2[1]);
-        this.tasks.add(event);
-        save();
-
-        if (print) {
-            System.out.println("Got it. I've added this Event:\n" + event);
-            this.printRemaining();
+            if (print) {
+                System.out.println("Got it. I've added this Event:\n" + event);
+                this.printRemaining();
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
         }
     }
 }
