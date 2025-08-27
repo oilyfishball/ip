@@ -13,6 +13,8 @@ import mypackage.task.ToDos;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -129,7 +131,7 @@ public class Store {
             tempStr = "E" + tempStr + "/from " + tempTask.getFrom() + " /to " + tempTask.getTo();
         } else if (currTask instanceof Deadlines) {
             Deadlines tempTask = (Deadlines) tasks.get(i);
-            tempStr = "D" + tempStr + "/by " + tempTask.getBy();
+            tempStr = "D" + tempStr + "/by " + tempTask.getSaveBy();
         }
         return tempStr;
     }
@@ -166,13 +168,18 @@ public class Store {
         if (info.length < 2) {
             throw new InvalidDeadlineByException();
         }
-        Task deadline = new Deadlines(info[0], info[1]);
-        this.tasks.add(deadline);
-        save();
+        try {
+            LocalDate date = LocalDate.parse(info[1]);
+            Task deadline = new Deadlines(info[0], date);
+            this.tasks.add(deadline);
+            save();
 
-        if (print) {
-            System.out.println("Got it. I've added this Deadline:\n" + deadline);
-            this.printRemaining();
+            if (print) {
+                System.out.println("Got it. I've added this Deadline:\n" + deadline);
+                this.printRemaining();
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
         }
     }
 
