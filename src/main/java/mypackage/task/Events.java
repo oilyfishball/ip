@@ -1,4 +1,4 @@
-package Package.Task;
+package mypackage.task;
 
 public class Events extends Task {
     private String from;

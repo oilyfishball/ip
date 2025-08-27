@@ -1,4 +1,4 @@
-package Package.Task;
+package mypackage.task;
 
 public class Task {
     private boolean done;

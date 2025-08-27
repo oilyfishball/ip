@@ -1,4 +1,4 @@
-package Exceptions.Task.InvalidDeadline;
+package exceptions.task.InvalidDeadline;
 
 public class InvalidDeadlineByException extends InvalidDeadlineException{
 

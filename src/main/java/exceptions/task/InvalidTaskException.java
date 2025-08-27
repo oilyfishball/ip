@@ -1,6 +1,6 @@
-package Exceptions.Task;
+package exceptions.task;
 
-import Exceptions.CheckedException;
+import exceptions.CheckedException;
 
 public class InvalidTaskException extends CheckedException {
     public InvalidTaskException(String message) {

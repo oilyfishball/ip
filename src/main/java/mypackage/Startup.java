@@ -1,4 +1,4 @@
-package Package;
+package mypackage;
 
 public class Startup {
     private static String startup_message = "Hello! I'm Ackermann\nWhat can I do for you?";

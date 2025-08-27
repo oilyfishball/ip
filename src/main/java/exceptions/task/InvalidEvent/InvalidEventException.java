@@ -1,6 +1,6 @@
-package Exceptions.Task.InvalidEvent;
+package exceptions.task.InvalidEvent;
 
-import Exceptions.Task.InvalidTaskException;
+import exceptions.task.InvalidTaskException;
 
 public class InvalidEventException extends InvalidTaskException {
     public InvalidEventException() {

@@ -1,6 +1,6 @@
-package Exceptions.Mark;
+package exceptions.mark;
 
-import Exceptions.CheckedException;
+import exceptions.CheckedException;
 
 public class InvalidMarkException extends CheckedException {
     public InvalidMarkException() {

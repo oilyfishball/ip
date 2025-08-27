@@ -1,4 +1,4 @@
-package Package;
+package mypackage;
 
 public class Global {
     private static String line = "-----------------------------------------------------";

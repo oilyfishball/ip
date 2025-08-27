@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class InvalidTargetException extends CheckedException {
     public InvalidTargetException() {

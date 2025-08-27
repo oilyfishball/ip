@@ -1,4 +1,4 @@
-package Package;
+package mypackage;
 
 public class Echo {
     public static void echo(String input) {

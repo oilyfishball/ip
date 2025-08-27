@@ -1,6 +1,6 @@
-package Exceptions.Task.InvalidDeadline;
+package exceptions.task.InvalidDeadline;
 
-import Exceptions.Task.InvalidTaskException;
+import exceptions.task.InvalidTaskException;
 
 public class InvalidDeadlineException extends InvalidTaskException {
     //0 is no space, 1 is no /by

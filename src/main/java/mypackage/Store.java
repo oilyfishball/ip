@@ -1,15 +1,15 @@
-package Package;
+package mypackage;
 
-import Exceptions.InvalidTargetException;
-import Exceptions.Task.InvalidDeadline.InvalidDeadlineByException;
-import Exceptions.Task.InvalidDeadline.InvalidDeadlineException;
-import Exceptions.Task.InvalidEvent.InvalidEventException;
-import Exceptions.Task.InvalidEvent.InvalidEventFromException;
-import Exceptions.Task.InvalidEvent.InvalidEventToException;
-import Package.Task.Deadlines;
-import Package.Task.Events;
-import Package.Task.Task;
-import Package.Task.ToDos;
+import exceptions.InvalidTargetException;
+import exceptions.task.InvalidDeadline.InvalidDeadlineByException;
+import exceptions.task.InvalidDeadline.InvalidDeadlineException;
+import exceptions.task.InvalidEvent.InvalidEventException;
+import exceptions.task.InvalidEvent.InvalidEventFromException;
+import exceptions.task.InvalidEvent.InvalidEventToException;
+import mypackage.task.Deadlines;
+import mypackage.task.Events;
+import mypackage.task.Task;
+import mypackage.task.ToDos;
 
 import java.util.ArrayList;
 
@@ -62,15 +62,28 @@ public class Store {
     public void printRemaining() {
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
     }
-    public void addtoDo(String input) {
+
+    //==============================addToDo==================================================
+    public void addToDo(String input) {
+        this.addToDo(input, true);
+    }
+
+    public void addToDo(String input, boolean print) {
         Task toDo = new ToDos(input);
         this.tasks.add(toDo);
 
-        System.out.println("Got it. I've added this ToDo:\n" + toDo);
-        this.printRemaining();
+        if (print) {
+            System.out.println("Got it. I've added this ToDo:\n" + toDo);
+            this.printRemaining();
+        }
     }
 
-    public void adddeadline(String input) throws InvalidDeadlineException {
+    //==============================addDeadline==================================================
+    public void addDeadline(String input) throws InvalidDeadlineException{
+        this.addDeadline(input, true);
+    }
+
+    public void addDeadline(String input, boolean print) throws InvalidDeadlineException {
         String[] info = input.split("/by ", 2);
         if (info.length < 2) {
             throw new InvalidDeadlineByException();
@@ -78,11 +91,18 @@ public class Store {
         Task deadline = new Deadlines(info[0], info[1]);
         this.tasks.add(deadline);
 
-        System.out.println("Got it. I've added this Deadline:\n" + deadline);
-        this.printRemaining();
+        if (print) {
+            System.out.println("Got it. I've added this Deadline:\n" + deadline);
+            this.printRemaining();
+        }
     }
 
-    public void addevent(String input) throws InvalidEventException {
+    //==============================addEvent==================================================
+    public void addEvent(String input) throws InvalidEventException {
+        this.addEvent(input, true);
+    }
+
+    public void addEvent(String input, boolean print) throws InvalidEventException {
         String[] info = input.split("/from ", 2);
         if (info.length < 2) {
             throw new InvalidEventFromException();
@@ -95,8 +115,11 @@ public class Store {
 
         Task event = new Events(info[0], info2[0], info2[1]);
         this.tasks.add(event);
-        System.out.println("Got it. I've added this Event:\n" + event);
-        this.printRemaining();
+
+        if (print) {
+            System.out.println("Got it. I've added this Event:\n" + event);
+            this.printRemaining();
+        }
     }
 
     public void delete(int i) throws InvalidTargetException{
@@ -110,5 +133,9 @@ public class Store {
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTargetException();
         }
+    }
+
+    public void save() {
+
     }
 }

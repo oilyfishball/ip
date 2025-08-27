@@ -1,6 +1,6 @@
-package Exceptions.Task.InvalidTodo;
+package exceptions.task.InvalidTodo;
 
-import Exceptions.Task.InvalidTaskException;
+import exceptions.task.InvalidTaskException;
 
 public class InvalidTodoException extends InvalidTaskException {
     public InvalidTodoException() {

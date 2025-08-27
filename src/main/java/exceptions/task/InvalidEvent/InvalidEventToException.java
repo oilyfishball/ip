@@ -1,4 +1,4 @@
-package Exceptions.Task.InvalidEvent;
+package exceptions.task.InvalidEvent;
 
 public class InvalidEventToException extends InvalidEventException {
     public InvalidEventToException() {
