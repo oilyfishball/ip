@@ -61,7 +61,7 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            File newFile = new File(String.valueOf(Global.FILEPATH));
+            File newFile = new File(String.valueOf(this.FILEPATH));
             try {
                 boolean success = newFile.createNewFile();
             } catch (IOException ex) {
@@ -155,7 +155,7 @@ public class Storage {
             }
         }
         try {
-            FileWriter myWriter = new FileWriter(String.valueOf(Global.FILEPATH));
+            FileWriter myWriter = new FileWriter(String.valueOf(this.FILEPATH));
             myWriter.write(String.valueOf(str));
             myWriter.close();
         } catch (IOException e) {

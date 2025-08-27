@@ -6,6 +6,10 @@ import exceptions.CheckedException;
 import mypackage.*;
 
 public class Ackermann {
+    private static final String LINE = "-----------------------------------------------------";
+    private static final String STARTUP = "Hello! I'm Ackermann\nWhat can I do for you?";
+    private static final String END = "Bye. Hope to see you again soon!";
+
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -26,21 +30,26 @@ public class Ackermann {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser(this.ui, this.tasks);
         boolean run = true;
-        Startup.print_startup();
+
+        System.out.println(LINE);
+        System.out.println(STARTUP);
+        System.out.println(LINE);
 
         while (run) {
             try {
                 String input = scanner.nextLine();
-                Global.printline();
+                System.out.println(LINE);
                 run = parser.parse(input);
                 this.storage.save(tasks);
-                if (run) Global.printline();
+                if (run) System.out.println(LINE);
             } catch (CheckedException e) {
                 System.out.println(e.getMessage());
-                Global.printline();
+                System.out.println(LINE);
             }
         }
-        Startup.print_end();
+
+        System.out.println(END);
+        System.out.println(LINE);
     }
 
     public static void main(String[] args) {
