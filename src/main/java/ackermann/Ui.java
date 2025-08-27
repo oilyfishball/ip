@@ -1,4 +1,4 @@
-package ackermann.ui;
+package ackermann;
 
 import ackermann.exceptions.InvalidTargetException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
@@ -31,6 +31,13 @@ public class Ui {
         System.out.println("Error loading saved info!");
     }
 
+    /**
+     * Marks a task as completed
+     *
+     * @param tasks List to find task.
+     * @param i     Key to find task.
+     * @throws InvalidTargetException
+     */
     public void mark(TaskList tasks, int i) throws InvalidTargetException {
         try {
             int id = i - 1;
@@ -43,6 +50,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Marks a task as uncompleted
+     *
+     * @param tasks List to find task.
+     * @param i     Key to find task.
+     * @throws InvalidTargetException
+     */
     public void unmark(TaskList tasks, int i) throws InvalidTargetException {
         try {
             int id = i - 1;
@@ -55,6 +69,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Deletes a task from list
+     *
+     * @param tasks List to delete task from.
+     * @param i     Key to find task.
+     * @throws InvalidTargetException
+     */
     public void delete(TaskList tasks, int i) throws InvalidTargetException {
         try {
             int id = i - 1;
@@ -68,20 +89,16 @@ public class Ui {
         }
     }
 
-/*
-    public void store(String input) {
-        Task task = new Task(input);
-        this.tasks.add(task);
-        System.out.println("added: " + input);
-    }
-
- */
-
     public void printRemaining(TaskList tasks) {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    //==============================addToDo==================================================
+    /**
+     * Adds toDo task to list of tasks
+     *
+     * @param tasks List to add task to.
+     * @param input Name of task.
+     */
     public void addToDo(TaskList tasks, String input) {
         Task toDo = new ToDos(input);
         tasks.add(toDo);
@@ -90,7 +107,13 @@ public class Ui {
         this.printRemaining(tasks);
     }
 
-    //==============================addDeadline==================================================
+    /**
+     * Adds deadline tasks to list of tasks
+     *
+     * @param tasks List of tasks to add result to.
+     * @param input Name of the task, and deadline to be completed by.
+     *              Takes on the form "something /by something".
+     */
     public void addDeadline(TaskList tasks, String input) throws InvalidDeadlineException {
         String[] info = input.split("/by ", 2);
         if (info.length < 2) {
@@ -108,7 +131,13 @@ public class Ui {
         }
     }
 
-    //==============================addEvent==================================================
+    /**
+     * Adds event tasks to list of tasks
+     *
+     * @param tasks List of tasks to add result to.
+     * @param input Name of the task, from when and to when.
+     *              Takes on the form "something /from something /to something".
+     */
     public void addEvent(TaskList tasks, String input) throws InvalidEventException {
         String[] info = input.split("/from ", 2);
         if (info.length < 2) {

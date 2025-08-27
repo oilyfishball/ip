@@ -1,4 +1,4 @@
-package ackermann.ui;
+package ackermann;
 
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
@@ -31,6 +31,8 @@ public class Storage {
 
     /**
      * Returns a list of tasks based on input file
+     * @return A list of tasks based on input file
+     * @throws CheckedException
      */
     public List<Task> load() throws CheckedException {
         try {

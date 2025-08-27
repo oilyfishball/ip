@@ -1,4 +1,4 @@
-package ackermann.ui;
+package ackermann;
 
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;

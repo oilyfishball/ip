@@ -5,10 +5,6 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import ackermann.exceptions.CheckedException;
-import ackermann.ui.Parser;
-import ackermann.ui.Storage;
-import ackermann.ui.TaskList;
-import ackermann.ui.Ui;
 
 public class Ackermann {
     private static final String LINE = "-----------------------------------------------------";

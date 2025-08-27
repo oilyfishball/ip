@@ -1,5 +1,6 @@
-package ackermann.ui;
+package ackermann;
 
+import ackermann.exceptions.InvalidTargetException;
 import ackermann.task.Task;
 
 import java.util.ArrayList;
