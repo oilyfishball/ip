@@ -26,4 +26,8 @@ mark 1
 unmark 1
 delete 3
 event Test3 /from 2025-08-27 /to 2025-09-01
+find
+find 2
+find test
+find Test
 bye

@@ -1,5 +1,6 @@
 package ackermann;
 
+import ackermann.exceptions.InvalidFindException;
 import ackermann.exceptions.InvalidTargetException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineException;
@@ -13,6 +14,7 @@ import ackermann.task.ToDos;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Deals with operations based on users' input
@@ -59,12 +61,14 @@ public class Ui {
      * @throws InvalidTargetException
      */
     public void delete(TaskList tasks, int i) throws InvalidTargetException {
-        tasks.delete(i);
+        int id = i - 1;
+        tasks.delete(id);
         this.printRemaining(tasks);
     }
 
     /**
      * Prints number of remaining tasks
+     *
      * @param tasks Tasklist to print
      */
     public void printRemaining(TaskList tasks) {
@@ -127,6 +131,32 @@ public class Ui {
             this.printRemaining(tasks);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
+        }
+    }
+
+    /**
+     * Finds tasks of which substring of names is equals to keyword
+     *
+     * @param keyword keyword to match the name of tasks
+     * @return A string of tasks
+     */
+    public String find(TaskList tasks, String keyword) {
+        try {
+            List<Task> foundTasks = tasks.find(keyword);
+            StringBuilder result = new StringBuilder();
+            result.append("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                result.append(foundTasks.get(i).toString());
+
+                if (i != foundTasks.size() - 1) {
+                    result.append("\n");
+                }
+            }
+
+            return String.valueOf(result);
+        } catch (InvalidFindException e) {
+            System.out.print(e.getMessage());
+            return "";
         }
     }
 }

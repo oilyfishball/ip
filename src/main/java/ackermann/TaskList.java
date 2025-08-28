@@ -1,5 +1,6 @@
 package ackermann;
 
+import ackermann.exceptions.InvalidFindException;
 import ackermann.exceptions.InvalidTargetException;
 import ackermann.task.Deadlines;
 import ackermann.task.Events;
@@ -49,15 +50,6 @@ public class TaskList {
      */
     public Task get(int i) {
         return this.tasks.get(i);
-    }
-
-    /**
-     * Removes a task from the list
-     *
-     * @param i index of the task to remove
-     */
-    public void remove(int i) {
-        this.tasks.remove(i);
     }
 
     /**
@@ -120,11 +112,10 @@ public class TaskList {
 
     /**
      * Deletes a task from the list
-     * @param i
+     * @param id Key to access the task to delete
      */
-    public void delete(int i) throws InvalidTargetException {
+    public void delete(int id) throws InvalidTargetException {
         try {
-            int id = i - 1;
             Task currTask = tasks.get(id);
             tasks.remove(id);
             System.out.println("Noted, I've removed this task:");
@@ -165,5 +156,28 @@ public class TaskList {
         Task event = new Events(name, from, to);
         this.tasks.add(event);
         System.out.println("Got it. I've added this Event:\n" + event);
+    }
+
+    /**
+     * Searches the task list for matching keyword
+     * Works regardless of keyword case
+     * @param keyword Search query
+     * @return A list of tasks that users search
+     * @throws InvalidFindException
+     */
+    public List<Task> find(String keyword) throws InvalidFindException {
+        List<Task> result = new ArrayList<>();
+
+        for (Task task : this.tasks) {
+            if (task.getName().toUpperCase().contains(keyword.toUpperCase())) {
+                result.add(task);
+            }
+        }
+
+        if (result.isEmpty()) {
+            throw new InvalidFindException();
+        } else {
+            return result;
+        }
     }
 }

@@ -3,6 +3,7 @@ package ackermann;
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
 import ackermann.exceptions.InvalidDeleteException;
+import ackermann.exceptions.InvalidFindException;
 import ackermann.exceptions.mark.InvalidMarkException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventException;
@@ -15,7 +16,7 @@ import static java.lang.Integer.parseInt;
  */
 public class Parser {
     private enum Codewords {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT;
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND;
 
         public static Parser.Codewords check(String x) throws InvalidCodeException {
             try {
@@ -101,6 +102,12 @@ public class Parser {
                 throw new InvalidEventException();
             }
             ui.addEvent(this.tasks, words[1]);
+            break;
+        case FIND:
+            if (words.length == 1 || words[1].isEmpty()) {
+                throw new InvalidFindException();
+            }
+            System.out.println(ui.find(tasks, words[1]));
             break;
         default:
             throw new InvalidCodeException();
