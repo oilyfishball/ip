@@ -14,17 +14,13 @@ import ackermann.task.ToDos;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deals with operations based on users' input
+ */
 public class Ui {
     public void list(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i) == null) {
-                break;
-            }
-            int curr = i + 1;
-
-            System.out.println(curr + ". " + tasks.get(i));
-        }
+        System.out.println(tasks.list());
     }
 
     public void showLoadingError() {
@@ -39,15 +35,8 @@ public class Ui {
      * @throws InvalidTargetException
      */
     public void mark(TaskList tasks, int i) throws InvalidTargetException {
-        try {
-            int id = i - 1;
-            Task currTask = tasks.get(id);
-            currTask.markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(currTask.toString());
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            throw new InvalidTargetException();
-        }
+        int id = i - 1;
+        tasks.mark(id);
     }
 
     /**

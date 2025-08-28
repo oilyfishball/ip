@@ -10,6 +10,9 @@ import ackermann.exceptions.task.InvalidTodo.InvalidTodoException;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Parser to parse codewords with values
+ */
 public class Parser {
     private enum Codewords {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT;

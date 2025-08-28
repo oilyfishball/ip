@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class to interact with saved tasks
+ */
 public class Storage {
     public final Path FILEPATH ;
 

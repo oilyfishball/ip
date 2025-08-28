@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 import ackermann.exceptions.CheckedException;
 
+/**
+ * Main program logic for chatbot
+ */
 public class Ackermann {
     private static final String LINE = "-----------------------------------------------------";
     private static final String STARTUP = "Hello! I'm Ackermann\nWhat can I do for you?";
@@ -37,19 +40,19 @@ public class Ackermann {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser(this.ui, this.tasks);
-        boolean run = true;
+        boolean isRun = true;
 
         System.out.println(LINE);
         System.out.println(STARTUP);
         System.out.println(LINE);
 
-        while (run) {
+        while (isRun) {
             try {
                 String input = scanner.nextLine();
                 System.out.println(LINE);
-                run = parser.parse(input);
+                isRun = parser.parse(input);
                 this.storage.save(tasks);
-                if (run) System.out.println(LINE);
+                if (isRun) System.out.println(LINE);
             } catch (CheckedException e) {
                 System.out.println(e.getMessage());
                 System.out.println(LINE);
