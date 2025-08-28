@@ -123,10 +123,7 @@ public class Ui {
         try {
             LocalDate from = LocalDate.parse(info2[0]);
             LocalDate to = LocalDate.parse(info2[1]);
-            Task event = new Events(info[0], from, to);
-            tasks.add(event);
-
-            System.out.println("Got it. I've added this Event:\n" + event);
+            tasks.addEvent(info[0], from, to);
             this.printRemaining(tasks);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");

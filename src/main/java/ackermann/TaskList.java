@@ -2,6 +2,7 @@ package ackermann;
 
 import ackermann.exceptions.InvalidTargetException;
 import ackermann.task.Deadlines;
+import ackermann.task.Events;
 import ackermann.task.Task;
 import ackermann.task.ToDos;
 
@@ -152,5 +153,17 @@ public class TaskList {
         Task deadline = new Deadlines(name, by);
         this.tasks.add(deadline);
         System.out.println("Got it. I've added this Deadline:\n" + deadline);
+    }
+
+    /**
+     * Adds a event task to list and prints success message
+     * @param name Name of task
+     * @param from Start date of task
+     * @param to End date of task
+     */
+    public void addEvent(String name, LocalDate from, LocalDate to) {
+        Task event = new Events(name, from, to);
+        this.tasks.add(event);
+        System.out.println("Got it. I've added this Event:\n" + event);
     }
 }
