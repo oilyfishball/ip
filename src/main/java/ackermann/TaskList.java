@@ -1,8 +1,11 @@
 package ackermann;
 
 import ackermann.exceptions.InvalidTargetException;
+import ackermann.task.Deadlines;
 import ackermann.task.Task;
+import ackermann.task.ToDos;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,5 +100,57 @@ public class TaskList {
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTargetException();
         }
+    }
+
+    /**
+     * Marks a task as not done and prints success message
+     *
+     * @param i Key to task in list
+     */
+    public void unmark(int i) throws InvalidTargetException {
+        try {
+            this.tasks.get(i).markAsUndone();
+            System.out.println("Ok, I've marked this task as not done yet:");
+            System.out.println(this.tasks.get(i).toString());
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            throw new InvalidTargetException();
+        }
+    }
+
+    /**
+     * Deletes a task from the list
+     * @param i
+     */
+    public void delete(int i) throws InvalidTargetException {
+        try {
+            int id = i - 1;
+            Task currTask = tasks.get(id);
+            tasks.remove(id);
+            System.out.println("Noted, I've removed this task:");
+            System.out.println(currTask.toString());
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            throw new InvalidTargetException();
+        }
+    }
+
+    /**
+     * Adds a todo task to list and prints success message
+     * @param input Name of task
+     */
+    public void addToDo(String input) {
+        Task toDo = new ToDos(input);
+        this.tasks.add(toDo);
+        System.out.println("Got it. I've added this ToDo:\n" + toDo);
+    }
+
+    /**
+     * Adds a deadline task to list and prints success message
+     * @param name Name of task
+     * @param by Deadline of task
+     */
+    public void addDeadline(String name, LocalDate by) {
+        Task deadline = new Deadlines(name, by);
+        this.tasks.add(deadline);
+        System.out.println("Got it. I've added this Deadline:\n" + deadline);
     }
 }

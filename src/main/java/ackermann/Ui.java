@@ -47,15 +47,8 @@ public class Ui {
      * @throws InvalidTargetException
      */
     public void unmark(TaskList tasks, int i) throws InvalidTargetException {
-        try {
-            int id = i - 1;
-            Task currTask = tasks.get(id);
-            currTask.markAsUndone();
-            System.out.println("Ok, I've marked this task as not done yet:");
-            System.out.println(currTask.toString());
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            throw new InvalidTargetException();
-        }
+        int id = i - 1;
+        tasks.unmark(id);
     }
 
     /**
@@ -66,18 +59,14 @@ public class Ui {
      * @throws InvalidTargetException
      */
     public void delete(TaskList tasks, int i) throws InvalidTargetException {
-        try {
-            int id = i - 1;
-            Task currTask = tasks.get(id);
-            tasks.remove(id);
-            System.out.println("Noted, I've removed this task:");
-            System.out.println(currTask.toString());
-            this.printRemaining(tasks);
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            throw new InvalidTargetException();
-        }
+        tasks.delete(i);
+        this.printRemaining(tasks);
     }
 
+    /**
+     * Prints number of remaining tasks
+     * @param tasks Tasklist to print
+     */
     public void printRemaining(TaskList tasks) {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
@@ -89,10 +78,7 @@ public class Ui {
      * @param input Name of task.
      */
     public void addToDo(TaskList tasks, String input) {
-        Task toDo = new ToDos(input);
-        tasks.add(toDo);
-
-        System.out.println("Got it. I've added this ToDo:\n" + toDo);
+        tasks.addToDo(input);
         this.printRemaining(tasks);
     }
 
@@ -110,10 +96,7 @@ public class Ui {
         }
         try {
             LocalDate date = LocalDate.parse(info[1]);
-            Task deadline = new Deadlines(info[0], date);
-            tasks.add(deadline);
-
-            System.out.println("Got it. I've added this Deadline:\n" + deadline);
+            tasks.addDeadline(info[0], date);
             this.printRemaining(tasks);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
