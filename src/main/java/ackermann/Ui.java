@@ -19,11 +19,18 @@ import java.util.List;
  * Deals with operations based on users' input
  */
 public class Ui {
+    /**
+     * Lists out all tasks
+     * @param tasks tasks to list
+     */
     public void list(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         System.out.println(tasks.list());
     }
 
+    /**
+     * Shows loading error
+     */
     public void showLoadingError() {
         System.out.println("Error loading saved info!");
     }

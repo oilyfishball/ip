@@ -1,6 +1,8 @@
 package ackermann.exceptions.task.InvalidDeadline;
 
-
+/**
+ * Exception for invalid date format for deadline
+ */
 public class InvalidDeadlineByException extends InvalidDeadlineException {
 
     public InvalidDeadlineByException() {

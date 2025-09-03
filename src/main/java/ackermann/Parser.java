@@ -4,7 +4,7 @@ import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
 import ackermann.exceptions.InvalidDeleteException;
 import ackermann.exceptions.InvalidFindException;
-import ackermann.exceptions.mark.InvalidMarkException;
+import ackermann.exceptions.InvalidMarkException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventException;
 import ackermann.exceptions.task.InvalidTodo.InvalidTodoException;

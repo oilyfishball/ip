@@ -1,6 +1,9 @@
 package ackermann.exceptions;
 
-public class InvalidCodeException extends CheckedException{
+/**
+ * Invalid codeword
+ */
+public class InvalidCodeException extends CheckedException {
     public InvalidCodeException() {
         super("No Such Codeword!");
     }
