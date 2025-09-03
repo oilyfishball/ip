@@ -16,7 +16,7 @@ public class ParserTest {
     public void valid_Inputs() throws CheckedException {
         TaskList tasks = new TaskList();
         Ui ui = new Ui(tasks);
-        Parser parser = new Parser(ui, tasks);
+        Parser parser = new Parser(tasks);
 
         String toDo = """
                 Got it. I've added this ToDo:
@@ -67,7 +67,7 @@ public class ParserTest {
     public void invalid_Codeword() {
         TaskList tasks = new TaskList();
         Ui ui = new Ui(tasks);
-        Parser parser = new Parser(ui, tasks);
+        Parser parser = new Parser(tasks);
 
         assertThrows(InvalidCodeException.class, () -> parser.parse("oops"));
     }

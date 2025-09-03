@@ -19,7 +19,7 @@ public class Ui {
      */
     public Ui(TaskList tasks) {
         this.tasks = tasks;
-        this.parser = new Parser(this, tasks);
+        this.parser = new Parser(tasks);
     }
 
     /**
@@ -67,5 +67,14 @@ public class Ui {
             System.out.println(result);
             return true;
         }
+    }
+
+    /**
+     * Prints error message
+     * @param message Error message to print
+     */
+    public void printException(String message) {
+        System.out.println(message);
+        this.printline();
     }
 }

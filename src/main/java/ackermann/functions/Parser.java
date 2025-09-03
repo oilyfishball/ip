@@ -46,17 +46,14 @@ public class Parser {
             }
         }
     }
-
-    private Ui ui;
     private TaskList tasks;
 
     /**
      * Constructor of Parser
-     * @param ui UI to use for chatbot operations
+     *
      * @param tasks task list to update to/ retrieve info from
      */
-    public Parser(Ui ui, TaskList tasks) {
-        this.ui = ui;
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 

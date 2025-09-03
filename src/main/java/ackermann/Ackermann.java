@@ -11,7 +11,7 @@ import ackermann.functions.TaskList;
 import ackermann.functions.Ui;
 
 /**
- * ackermann.Main program logic for chatbot
+ * Main program logic for chatbot
  */
 public class Ackermann {
 
@@ -35,6 +35,17 @@ public class Ackermann {
         }
     }
 
+    public String getResponse(String input) {
+        Parser parser = new Parser(this.tasks);
+        try {
+            String result = parser.parse(input);
+            this.storage.save(tasks);
+            return result;
+        } catch (CheckedException e) {
+            return e.getMessage();
+        }
+    }
+
     /**
      * Runs the chatbot
      */
@@ -54,8 +65,7 @@ public class Ackermann {
                     ui.printline();
                 }
             } catch (CheckedException e) {
-                System.out.println(e.getMessage());
-                ui.printline();
+                ui.printException(e.getMessage());
             }
         }
         ui.end();
