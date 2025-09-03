@@ -14,9 +14,6 @@ import ackermann.functions.Ui;
  * ackermann.Main program logic for chatbot
  */
 public class Ackermann {
-    public static final String END = "Bye. Hope to see you again soon!";
-    private static final String LINE = "-----------------------------------------------------";
-    private static final String STARTUP = "Hello! I'm Ackermann\nWhat can I do for you?";
 
     private Ui ui;
     private Storage storage;
@@ -27,11 +24,11 @@ public class Ackermann {
      * @param filePath filepath of saved tasks
      */
     public Ackermann(Path filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
 
         try {
             tasks = new TaskList(storage.load());
+            this.ui = new Ui(this.tasks);
         } catch (CheckedException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -43,28 +40,25 @@ public class Ackermann {
      */
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        Parser parser = new Parser(this.ui, this.tasks);
         boolean isRun = true;
 
-        System.out.println(LINE);
-        System.out.println(STARTUP);
-        System.out.println(LINE);
+        this.ui.startup();
 
         while (isRun) {
             try {
                 String input = scanner.nextLine();
-                System.out.println(LINE);
-                isRun = parser.parse(input);
+                ui.printline();
+                isRun = ui.isRun(input);
                 this.storage.save(tasks);
-                if (isRun) System.out.println(LINE);
+                if (isRun) {
+                    ui.printline();
+                }
             } catch (CheckedException e) {
                 System.out.println(e.getMessage());
-                System.out.println(LINE);
+                ui.printline();
             }
         }
-
-        System.out.println(END);
-        System.out.println(LINE);
+        ui.end();
     }
 
     public static void main(String[] args) {
