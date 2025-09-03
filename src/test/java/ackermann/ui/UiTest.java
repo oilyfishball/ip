@@ -1,7 +1,7 @@
 package ackermann.ui;
 
-import ackermann.TaskList;
-import ackermann.Ui;
+import ackermann.functions.TaskList;
+import ackermann.functions.Ui;
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidTargetException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;

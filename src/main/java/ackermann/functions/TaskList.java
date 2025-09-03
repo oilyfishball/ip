@@ -1,4 +1,4 @@
-package ackermann;
+package ackermann.functions;
 
 import ackermann.exceptions.InvalidFindException;
 import ackermann.exceptions.InvalidTargetException;
@@ -84,12 +84,15 @@ public class TaskList {
      * Marks a task as done and prints success message
      *
      * @param i Key to task in list
+     * @return An output String
      */
     public void mark(int i) throws InvalidTargetException {
         try {
+//            String str = "Nice! I've marked this task as done:\n" + this.tasks.get(i).toString();
             this.tasks.get(i).markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this.tasks.get(i).toString());
+//            System.out.println("Nice! I've marked this task as done:");
+//            System.out.println(this.tasks.get(i).toString());
+//            return str;
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTargetException();
         }
@@ -116,10 +119,7 @@ public class TaskList {
      */
     public void delete(int id) throws InvalidTargetException {
         try {
-            Task currTask = tasks.get(id);
             tasks.remove(id);
-            System.out.println("Noted, I've removed this task:");
-            System.out.println(currTask.toString());
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTargetException();
         }

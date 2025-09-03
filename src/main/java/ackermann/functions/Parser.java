@@ -1,4 +1,6 @@
-package ackermann;
+package ackermann.functions;
+
+import static java.lang.Integer.parseInt;
 
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
@@ -8,8 +10,6 @@ import ackermann.exceptions.InvalidMarkException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventException;
 import ackermann.exceptions.task.InvalidTodo.InvalidTodoException;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Parser to parse codewords with values
@@ -47,7 +47,7 @@ public class Parser {
     /**
      * Parses the codeword and details to perform operation
      * @param input
-     * @return A boolean on whether or not the program should terminate
+     * @return A boolean on whether the program should terminate
      * @throws CheckedException
      */
     public boolean parse(String input) throws CheckedException {
@@ -95,6 +95,7 @@ public class Parser {
             if (words.length == 1 || words[1].isEmpty()) {
                 throw new InvalidDeadlineException();
             }
+
             ui.addDeadline(this.tasks, words[1]);
             break;
         case EVENT:
@@ -107,7 +108,7 @@ public class Parser {
             if (words.length == 1 || words[1].isEmpty()) {
                 throw new InvalidFindException();
             }
-            System.out.println(ui.find(tasks, words[1]));
+            ui.find(tasks, words[1]);
             break;
         default:
             throw new InvalidCodeException();

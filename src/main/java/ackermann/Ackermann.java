@@ -5,14 +5,18 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import ackermann.exceptions.CheckedException;
+import ackermann.functions.Parser;
+import ackermann.functions.Storage;
+import ackermann.functions.TaskList;
+import ackermann.functions.Ui;
 
 /**
- * Main program logic for chatbot
+ * ackermann.Main program logic for chatbot
  */
 public class Ackermann {
+    public static final String END = "Bye. Hope to see you again soon!";
     private static final String LINE = "-----------------------------------------------------";
     private static final String STARTUP = "Hello! I'm Ackermann\nWhat can I do for you?";
-    private static final String END = "Bye. Hope to see you again soon!";
 
     private Ui ui;
     private Storage storage;

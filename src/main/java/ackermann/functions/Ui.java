@@ -1,19 +1,23 @@
-package ackermann;
-
-import ackermann.exceptions.InvalidFindException;
-import ackermann.exceptions.InvalidTargetException;
-
-import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
-import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineException;
-import ackermann.exceptions.task.InvalidEvent.InvalidEventException;
-import ackermann.exceptions.task.InvalidEvent.InvalidEventFromException;
-import ackermann.exceptions.task.InvalidEvent.InvalidEventToException;
-
-import ackermann.task.Task;
+package ackermann.functions;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
+
+import ackermann.codewords.Codeword;
+import ackermann.codewords.DeadlineCodeword;
+import ackermann.codewords.DeleteCodeword;
+import ackermann.codewords.EventCodeword;
+import ackermann.codewords.FindCodeword;
+import ackermann.codewords.ListCodeword;
+import ackermann.codewords.MarkCodeword;
+import ackermann.codewords.TodoCodeword;
+import ackermann.codewords.UnmarkCodeword;
+import ackermann.exceptions.CheckedException;
+import ackermann.exceptions.InvalidFindException;
+import ackermann.exceptions.InvalidTargetException;
+import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
+import ackermann.exceptions.task.InvalidEvent.InvalidEventFromException;
+import ackermann.exceptions.task.InvalidEvent.InvalidEventToException;
 
 /**
  * Deals with operations based on users' input
@@ -23,9 +27,9 @@ public class Ui {
      * Lists out all tasks
      * @param tasks tasks to list
      */
-    public void list(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks.list());
+    public void list(TaskList tasks) throws CheckedException {
+        Codeword codeword = new ListCodeword(tasks);
+        System.out.println(codeword.execute());
     }
 
     /**
@@ -40,11 +44,12 @@ public class Ui {
      *
      * @param tasks List to find task.
      * @param i     Key to find task.
-     * @throws InvalidTargetException
+     * @throws CheckedException
      */
-    public void mark(TaskList tasks, int i) throws InvalidTargetException {
+    public void mark(TaskList tasks, int i) throws CheckedException {
         int id = i - 1;
-        tasks.mark(id);
+        Codeword codeword = new MarkCodeword(tasks, id);
+        System.out.println(codeword.execute());
     }
 
     /**
@@ -54,9 +59,10 @@ public class Ui {
      * @param i     Key to find task.
      * @throws InvalidTargetException
      */
-    public void unmark(TaskList tasks, int i) throws InvalidTargetException {
+    public void unmark(TaskList tasks, int i) throws CheckedException {
         int id = i - 1;
-        tasks.unmark(id);
+        Codeword codeword = new UnmarkCodeword(tasks, id);
+        System.out.println(codeword.execute());
     }
 
     /**
@@ -66,10 +72,10 @@ public class Ui {
      * @param i     Key to find task.
      * @throws InvalidTargetException
      */
-    public void delete(TaskList tasks, int i) throws InvalidTargetException {
+    public void delete(TaskList tasks, int i) throws CheckedException {
         int id = i - 1;
-        tasks.delete(id);
-        this.printRemaining(tasks);
+        Codeword codeword = new DeleteCodeword(tasks, id);
+        System.out.println(codeword.execute());
     }
 
     /**
@@ -87,9 +93,9 @@ public class Ui {
      * @param tasks List to add task to.
      * @param input Name of task.
      */
-    public void addToDo(TaskList tasks, String input) {
-        tasks.addToDo(input);
-        this.printRemaining(tasks);
+    public void addToDo(TaskList tasks, String input) throws CheckedException {
+        Codeword codeword = new TodoCodeword(tasks, input);
+        System.out.println(codeword.execute());
     }
 
     /**
@@ -99,15 +105,15 @@ public class Ui {
      * @param input Name of the task, and deadline to be completed by.
      *              Takes on the form "something /by something".
      */
-    public void addDeadline(TaskList tasks, String input) throws InvalidDeadlineException {
+    public void addDeadline(TaskList tasks, String input) throws CheckedException {
         String[] info = input.split("/by ", 2);
         if (info.length < 2) {
             throw new InvalidDeadlineByException();
         }
         try {
             LocalDate date = LocalDate.parse(info[1]);
-            tasks.addDeadline(info[0], date);
-            this.printRemaining(tasks);
+            Codeword codeword = new DeadlineCodeword(tasks, info[0], date);
+            System.out.println(codeword.execute());
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
         }
@@ -120,7 +126,7 @@ public class Ui {
      * @param input Name of the task, from when and to when.
      *              Takes on the form "something /from something /to something".
      */
-    public void addEvent(TaskList tasks, String input) throws InvalidEventException {
+    public void addEvent(TaskList tasks, String input) throws CheckedException {
         String[] info = input.split("/from ", 2);
         if (info.length < 2) {
             throw new InvalidEventFromException();
@@ -133,8 +139,8 @@ public class Ui {
         try {
             LocalDate from = LocalDate.parse(info2[0]);
             LocalDate to = LocalDate.parse(info2[1]);
-            tasks.addEvent(info[0], from, to);
-            this.printRemaining(tasks);
+            Codeword codeword = new EventCodeword(tasks, info[0], from, to);
+            System.out.println(codeword.execute());
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
         }
@@ -142,27 +148,15 @@ public class Ui {
 
     /**
      * Finds tasks of which substring of names is equals to keyword
-     *
+     * @param tasks tasks to find from
      * @param keyword keyword to match the name of tasks
-     * @return A string of tasks
      */
-    public String find(TaskList tasks, String keyword) {
+    public void find(TaskList tasks, String keyword) throws CheckedException {
         try {
-            List<Task> foundTasks = tasks.find(keyword);
-            StringBuilder result = new StringBuilder();
-            result.append("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < foundTasks.size(); i++) {
-                result.append(foundTasks.get(i).toString());
-
-                if (i != foundTasks.size() - 1) {
-                    result.append("\n");
-                }
-            }
-
-            return String.valueOf(result);
+            Codeword codeword = new FindCodeword(tasks, keyword);
+            System.out.println(codeword.execute());
         } catch (InvalidFindException e) {
             System.out.print(e.getMessage());
-            return "";
         }
     }
 }

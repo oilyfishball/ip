@@ -1,4 +1,4 @@
-package ackermann;
+package ackermann.functions;
 
 /**
  * Class to parrot response

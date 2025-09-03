@@ -1,8 +1,8 @@
 package ackermann.ui;
 
-import ackermann.Parser;
-import ackermann.TaskList;
-import ackermann.Ui;
+import ackermann.functions.Parser;
+import ackermann.functions.TaskList;
+import ackermann.functions.Ui;
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
 import org.junit.jupiter.api.Test;
