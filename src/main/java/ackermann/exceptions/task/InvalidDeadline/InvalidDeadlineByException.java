@@ -1,5 +1,6 @@
 package ackermann.exceptions.task.InvalidDeadline;
 
+
 public class InvalidDeadlineByException extends InvalidDeadlineException {
 
     public InvalidDeadlineByException() {
