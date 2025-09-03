@@ -85,7 +85,9 @@ public class Storage {
      */
     private void addToDo(List<Task> tasks, String value, boolean status) {
         Task tempToDo = new ToDos(value);
-        if (status) tempToDo.markAsDone();
+        if (status) {
+            tempToDo.markAsDone();
+        }
         tasks.add(tempToDo);
     }
 
@@ -107,7 +109,9 @@ public class Storage {
             String name = deadlineInfo[0];
             LocalDate by = LocalDate.parse(deadlineInfo[1]);
             Task tempDeadline = new Deadlines(name, by);
-            if (status) tempDeadline.markAsDone();
+            if (status) {
+                tempDeadline.markAsDone();
+            }
             tasks.add(tempDeadline);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
@@ -137,7 +141,9 @@ public class Storage {
             LocalDate from = LocalDate.parse(eventInfo2[0]);
             LocalDate to = LocalDate.parse(eventInfo2[1]);
             Task tempEvent = new Events(eventInfo1[0], from, to);
-            if (status) tempEvent.markAsDone();
+            if (status) {
+                tempEvent.markAsDone();
+            }
             tasks.add(tempEvent);
 
         } catch (DateTimeParseException e) {

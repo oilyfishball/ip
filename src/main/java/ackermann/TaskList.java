@@ -166,18 +166,18 @@ public class TaskList {
      * @throws InvalidFindException
      */
     public List<Task> find(String keyword) throws InvalidFindException {
-        List<Task> result = new ArrayList<>();
+        List<Task> results = new ArrayList<>();
 
         for (Task task : this.tasks) {
             if (task.getName().toUpperCase().contains(keyword.toUpperCase())) {
-                result.add(task);
+                results.add(task);
             }
         }
 
-        if (result.isEmpty()) {
+        if (results.isEmpty()) {
             throw new InvalidFindException();
         } else {
-            return result;
+            return results;
         }
     }
 }
