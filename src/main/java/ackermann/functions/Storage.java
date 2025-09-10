@@ -26,6 +26,10 @@ import ackermann.task.ToDos;
 public class Storage {
     public final Path filePath;
 
+    /**
+     * Constructor for Storage
+     * @param filepath
+     */
     public Storage(Path filepath) {
         this.filePath = filepath;
     }
@@ -41,7 +45,6 @@ public class Storage {
             TaskList tasks = new TaskList();
 
             loadTasks(fileIn, tasks);
-
             return tasks;
         } catch (FileNotFoundException e) {
             return createNewFile();

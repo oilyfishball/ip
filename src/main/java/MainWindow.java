@@ -30,8 +30,13 @@ public class MainWindow extends AnchorPane {
     }
 
     /** Injects the Duke instance */
-    public void setAckermann(Ackermann d) {
-        ackermann = d;
+    @FXML
+    public void setAckermann(Ackermann a) {
+        ackermann = a;
+
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Hello! I'm Ackermann\nWhat can I do for you?", AckermannImage)
+        ); // Startup Message
     }
 
     /**

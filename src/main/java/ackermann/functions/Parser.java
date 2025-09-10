@@ -4,6 +4,7 @@ import static java.lang.Integer.parseInt;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 import ackermann.codewords.Codeword;
 import ackermann.codewords.DeadlineCodeword;
@@ -55,6 +56,7 @@ public class Parser {
      */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
+        assert this.tasks != null : "Null tasks";
     }
 
     /**
@@ -66,6 +68,7 @@ public class Parser {
     public String parse(String input) throws CheckedException {
         String[] words = input.split(" ", 2);
         Parser.Codewords codeword = Parser.Codewords.check(words[0]);
+        assert codeword != null : "Empty Codeword not handled";
 
         return switch (codeword) {
             case BYE -> Ui.END;

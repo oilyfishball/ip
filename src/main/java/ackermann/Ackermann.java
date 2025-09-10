@@ -14,7 +14,6 @@ import ackermann.functions.Ui;
  * Main program logic for chatbot
  */
 public class Ackermann {
-
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -43,6 +42,7 @@ public class Ackermann {
      */
     public String getResponse(String input) {
         Parser parser = new Parser(this.tasks);
+
         try {
             String result = parser.parse(input);
             this.storage.save(tasks);
