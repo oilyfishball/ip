@@ -66,6 +66,7 @@ public class Parser {
     public String parse(String input) throws CheckedException {
         String[] words = input.split(" ", 2);
         Parser.Codewords codeword = Parser.Codewords.check(words[0]);
+        assert codeword != null : "Empty Codeword not handled";
 
         switch (codeword) {
         case BYE:
