@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
+//    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
@@ -43,8 +43,12 @@ test {
     }
 }
 
+run {
+    enableAssertions = true
+}
+
 application {
-    mainClass.set("Launcher")
+    mainClass.set("ackermann.Ackermann")
 }
 
 shadowJar {

@@ -37,6 +37,7 @@ public class Ackermann {
 
     public String getResponse(String input) {
         Parser parser = new Parser(this.tasks);
+
         try {
             String result = parser.parse(input);
             this.storage.save(tasks);
