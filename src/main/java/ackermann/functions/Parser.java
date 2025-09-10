@@ -67,27 +67,17 @@ public class Parser {
         String[] words = input.split(" ", 2);
         Parser.Codewords codeword = Parser.Codewords.check(words[0]);
 
-        switch (codeword) {
-        case BYE:
-            return Ui.END;
-        case LIST:
-            return this.list(tasks);
-        case MARK:
-        case UNMARK:
-            return this.handleMark(words);
-        case DELETE:
-            return this.handleDelete(words);
-        case TODO:
-            return this.addToDo(this.tasks, words);
-        case DEADLINE:
-            return this.addDeadline(this.tasks, words);
-        case EVENT:
-            return this.addEvent(this.tasks, words);
-        case FIND:
-            return this.find(tasks, words);
-        default:
-            throw new InvalidCodeException();
-        }
+        return switch (codeword) {
+            case BYE -> Ui.END;
+            case LIST -> this.list(tasks);
+            case MARK, UNMARK -> this.handleMark(words);
+            case DELETE -> this.handleDelete(words);
+            case TODO -> this.addToDo(this.tasks, words);
+            case DEADLINE -> this.addDeadline(this.tasks, words);
+            case EVENT -> this.addEvent(this.tasks, words);
+            case FIND -> this.find(tasks, words);
+            default -> throw new InvalidCodeException();
+        };
     }
 
     /**

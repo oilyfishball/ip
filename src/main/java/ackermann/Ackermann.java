@@ -27,7 +27,7 @@ public class Ackermann {
         this.storage = new Storage(filePath);
 
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = storage.load();
             this.ui = new Ui(this.tasks);
         } catch (CheckedException e) {
             ui.showLoadingError();
