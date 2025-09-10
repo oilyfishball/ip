@@ -3,7 +3,10 @@ package ackermann.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task{
+/**
+ * Class to create Deadline object
+ */
+public class Deadlines extends Task {
     private LocalDate by;
 
     /**
@@ -18,7 +21,7 @@ public class Deadlines extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by " + this.getBy()+ ")";
+        return "[D]" + super.toString() + "(by " + this.getBy() + ")";
     }
 
     /**
@@ -27,7 +30,6 @@ public class Deadlines extends Task{
      */
     public String getBy() {
         return by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-//        return this.by;
     }
 
     /**
