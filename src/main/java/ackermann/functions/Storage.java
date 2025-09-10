@@ -46,10 +46,10 @@ public class Storage {
             Scanner fileIn = new Scanner(new File(String.valueOf(this.FILEPATH)));
             assert fileIn != null : "File not found";
             List<Task> tasks = new ArrayList<>();
+            assert fileIn != null : "No file not handled";
 
             while (fileIn.hasNext()) {
                 String next = fileIn.nextLine();
-                //scans next line
                 String[] taskStr = next.split(" \\| ");
                 String type = taskStr[0];
                 boolean status = taskStr[1].equals("1");
