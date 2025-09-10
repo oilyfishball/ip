@@ -14,7 +14,6 @@ import ackermann.functions.Ui;
  * Main program logic for chatbot
  */
 public class Ackermann {
-
     private Ui ui;
     private Storage storage;
     private TaskList tasks;

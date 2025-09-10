@@ -48,7 +48,7 @@ run {
 }
 
 application {
-    mainClass.set("ackermann.Ackermann")
+    mainClass.set("Launcher")
 }
 
 shadowJar {
