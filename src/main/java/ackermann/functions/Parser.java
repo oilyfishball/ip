@@ -74,51 +74,55 @@ public class Parser {
             return this.list(tasks);
         case MARK:
         case UNMARK:
-            try {
-                int target = parseInt(words[1]);
-                String mark = words[0];
-
-                if (mark.equals("mark")) {
-                    return this.mark(tasks, target);
-                } else if (mark.equals("unmark")) {
-                    return this.unmark(tasks, target);
-                } else {
-                    throw new InvalidCodeException();
-                }
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidMarkException();
-            }
+            return this.handleMark(words);
         case DELETE:
-            try {
-                int target = parseInt(words[1]);
-                return this.delete(tasks, target);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidDeleteException();
-            }
+            return this.handleDelete(words);
         case TODO:
-            if (words.length == 1 || words[1].isEmpty()) {
-                throw new InvalidTodoException();
-            }
-            return this.addToDo(this.tasks, words[1]);
+            return this.addToDo(this.tasks, words);
         case DEADLINE:
-            if (words.length == 1 || words[1].isEmpty()) {
-                throw new InvalidDeadlineException();
-            }
-
-            return this.addDeadline(this.tasks, words[1]);
+            return this.addDeadline(this.tasks, words);
         case EVENT:
-            if (words.length == 1 || words[1].isEmpty()) {
-                throw new InvalidEventException();
-            }
-
-            return this.addEvent(this.tasks, words[1]);
+            return this.addEvent(this.tasks, words);
         case FIND:
-            if (words.length == 1 || words[1].isEmpty()) {
-                throw new InvalidFindException();
-            }
-            return this.find(tasks, words[1]);
+            return this.find(tasks, words);
         default:
             throw new InvalidCodeException();
+        }
+    }
+
+    /**
+     * Handles logic for deleting
+     * @param words mark and target
+     * @throws CheckedException
+     */
+    private String handleDelete(String[] words) throws CheckedException {
+        try {
+            int target = parseInt(words[1]);
+            return this.delete(tasks, target);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidDeleteException();
+        }
+    }
+
+    /**
+     * Handles logic for mark or unmark
+     * @param words mark and target
+     * @throws CheckedException
+     */
+    private String handleMark(String[] words) throws CheckedException {
+        try {
+            int target = parseInt(words[1]);
+            String mark = words[0];
+
+            if (mark.equals("mark")) {
+                return this.mark(tasks, target);
+            } else if (mark.equals("unmark")) {
+                return this.unmark(tasks, target);
+            } else {
+                throw new InvalidCodeException();
+            }
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidMarkException();
         }
     }
 
@@ -183,9 +187,13 @@ public class Parser {
      * Adds toDo task to list of tasks
      *
      * @param tasks List to add task to.
-     * @param input Name of task.
+     * @param words codeword and task value
      */
-    public String addToDo(TaskList tasks, String input) throws CheckedException {
+    public String addToDo(TaskList tasks, String[] words) throws CheckedException {
+        if (words.length == 1 || words[1].isEmpty()) {
+            throw new InvalidTodoException();
+        }
+        String input = words[1];
         Codeword codeword = new TodoCodeword(tasks, input);
         return codeword.execute();
     }
@@ -194,10 +202,14 @@ public class Parser {
      * Adds deadline tasks to list of tasks
      *
      * @param tasks List of tasks to add result to.
-     * @param input Name of the task, and deadline to be completed by.
+     * @param words Codeword, Name of the task, and deadline to be completed by.
      *              Takes on the form "something /by something".
      */
-    public String addDeadline(TaskList tasks, String input) throws CheckedException {
+    public String addDeadline(TaskList tasks, String[] words) throws CheckedException {
+        if (words.length == 1 || words[1].isEmpty()) {
+            throw new InvalidDeadlineException();
+        }
+        String input = words[1];
         String[] info = input.split("/by ", 2);
         if (info.length < 2) {
             throw new InvalidDeadlineByException();
@@ -215,10 +227,14 @@ public class Parser {
      * Adds event tasks to list of tasks
      *
      * @param tasks List of tasks to add result to.
-     * @param input Name of the task, from when and to when.
+     * @param words Codeword, Name of the task, from when and to when.
      *              Takes on the form "something /from something /to something".
      */
-    public String addEvent(TaskList tasks, String input) throws CheckedException {
+    public String addEvent(TaskList tasks, String[] words) throws CheckedException {
+        if (words.length == 1 || words[1].isEmpty()) {
+            throw new InvalidEventException();
+        }
+        String input = words[1];
         String[] info = input.split("/from ", 2);
         if (info.length < 2) {
             throw new InvalidEventFromException();
@@ -240,10 +256,15 @@ public class Parser {
 
     /**
      * Finds tasks of which substring of names is equals to keyword
+     *
      * @param tasks tasks to find from
-     * @param keyword keyword to match the name of tasks
+     * @param words Codeword and keyword to search
      */
-    public String find(TaskList tasks, String keyword) throws CheckedException {
+    public String find(TaskList tasks, String[] words) throws CheckedException {
+        if (words.length == 1 || words[1].isEmpty()) {
+            throw new InvalidFindException();
+        }
+        String keyword = words[1];
         try {
             Codeword codeword = new FindCodeword(tasks, keyword);
             return codeword.execute();
