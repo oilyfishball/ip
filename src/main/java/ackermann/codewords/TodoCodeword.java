@@ -23,8 +23,15 @@ public class TodoCodeword extends Codeword {
 
     @Override
     public String execute() {
+        StringBuilder output = new StringBuilder();
         Task toDo = new ToDos(this.name);
         this.tasks.add(toDo);
-        return "Got it. I've added this ToDo:\n" + toDo + "\nNow you have " + this.tasks.size() + " tasks in the list.";
+        return String.valueOf(
+                output.append("Got it. I've added this ToDo:\n")
+                        .append(toDo)
+                        .append("\nNow you have ")
+                        .append(this.tasks.size())
+                        .append(" tasks in the list.")
+        );
     }
 }
