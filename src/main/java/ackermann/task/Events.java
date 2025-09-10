@@ -3,6 +3,10 @@ package ackermann.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
+/**
+ * Class to create Event object
+ */
 public class Events extends Task {
     private LocalDate from;
     private LocalDate to;

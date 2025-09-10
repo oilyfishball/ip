@@ -1,5 +1,14 @@
 package ackermann.functions;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
@@ -11,29 +20,18 @@ import ackermann.task.Events;
 import ackermann.task.Task;
 import ackermann.task.ToDos;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 /**
  * Class to interact with saved tasks
  */
 public class Storage {
-    public final Path FILEPATH ;
+    public final Path filePath;
 
     /**
      * Constructor for Storage
      * @param filepath
      */
     public Storage(Path filepath) {
-        this.FILEPATH = filepath;
+        this.filePath = filepath;
     }
 
     /**
@@ -41,45 +39,60 @@ public class Storage {
      * @return A list of tasks based on input file
      * @throws CheckedException
      */
-    public List<Task> load() throws CheckedException {
+    public TaskList load() throws CheckedException {
         try {
-            Scanner fileIn = new Scanner(new File(String.valueOf(this.FILEPATH)));
-            assert fileIn != null : "File not found";
-            List<Task> tasks = new ArrayList<>();
-            assert fileIn != null : "No file not handled";
+            Scanner fileIn = new Scanner(new File(String.valueOf(this.filePath)));
+            TaskList tasks = new TaskList();
 
-            while (fileIn.hasNext()) {
-                String next = fileIn.nextLine();
-                String[] taskStr = next.split(" \\| ");
-                String type = taskStr[0];
-                boolean status = taskStr[1].equals("1");
-                String value = taskStr[2];
-                assert !type.isEmpty() : "type of task is empty";
-                assert !value.isEmpty() : "value of task is empty";
-
-                switch (type) {
-                case "T":
-                    addToDo(tasks, value, status);
-                    break;
-                case "D":
-                    addDeadline(tasks, value, status);
-                    break;
-                case "E":
-                    addEvent(tasks, value, status);
-                    break;
-                default:
-                    throw new InvalidCodeException();
-                }
-            }
+            loadTasks(fileIn, tasks);
             return tasks;
         } catch (FileNotFoundException e) {
-            File newFile = new File(String.valueOf(this.FILEPATH));
-            try {
-                boolean success = newFile.createNewFile();
-            } catch (IOException ex) {
-                System.out.println("Error creating new file!");
+            return createNewFile();
+        }
+    }
+
+    /**
+     * Creates a new txt file to store tasks
+     * @return empty task list
+     */
+    private TaskList createNewFile() {
+        File newFile = new File(String.valueOf(this.filePath));
+        try {
+            boolean success = newFile.createNewFile();
+        } catch (IOException ex) {
+            System.out.println("Error creating new file!");
+        }
+        return new TaskList();
+    }
+
+    /**
+     * Load all tasks from file to array
+     * @param fileIn
+     * @param tasks
+     * @throws CheckedException
+     */
+    private void loadTasks(Scanner fileIn, TaskList tasks) throws CheckedException {
+        while (fileIn.hasNext()) {
+            String next = fileIn.nextLine();
+            //scans next line
+            String[] taskStr = next.split(" \\| ");
+            String type = taskStr[0];
+            boolean status = taskStr[1].equals("1");
+            String value = taskStr[2];
+
+            switch (type) {
+            case "T":
+                addToDo(tasks, value, status);
+                break;
+            case "D":
+                addDeadline(tasks, value, status);
+                break;
+            case "E":
+                addEvent(tasks, value, status);
+                break;
+            default:
+                throw new InvalidCodeException();
             }
-            return new ArrayList<Task>();
         }
     }
 
@@ -90,7 +103,7 @@ public class Storage {
      * @param value Name of the task.
      * @param status Checks if the task is completed.
      */
-    private void addToDo(List<Task> tasks, String value, boolean status) {
+    private void addToDo(TaskList tasks, String value, boolean status) {
         Task tempToDo = new ToDos(value);
         if (status) {
             tempToDo.markAsDone();
@@ -106,7 +119,7 @@ public class Storage {
      *              Takes on the form "something /by something".
      * @param status Checks if the task is completed.
      */
-    private void addDeadline(List<Task> tasks, String value, boolean status) throws InvalidDeadlineByException {
+    private void addDeadline(TaskList tasks, String value, boolean status) throws InvalidDeadlineByException {
         String[] deadlineInfo = value.split("/by ", 2);
         if (deadlineInfo.length < 2) {
             throw new InvalidDeadlineByException();
@@ -133,17 +146,15 @@ public class Storage {
      *              Takes on the form "something /from something /to something".
      * @param status Checks if the task is completed.
      */
-    private void addEvent(List<Task> tasks, String value, boolean status) throws InvalidEventException {
+    private void addEvent(TaskList tasks, String value, boolean status) throws InvalidEventException {
         String[] eventInfo1 = value.split("/from ", 2);
         if (eventInfo1.length < 2) {
             throw new InvalidEventFromException();
         }
-
         String[] eventInfo2 = eventInfo1[1].split(" /to ", 2);
         if (eventInfo2.length < 2) {
             throw new InvalidEventToException();
         }
-
         try {
             LocalDate from = LocalDate.parse(eventInfo2[0]);
             LocalDate to = LocalDate.parse(eventInfo2[1]);
@@ -157,7 +168,6 @@ public class Storage {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
         }
     }
-
 
     /**
      * Saves tasks to a file
@@ -176,7 +186,7 @@ public class Storage {
             }
         }
         try {
-            FileWriter myWriter = new FileWriter(String.valueOf(this.FILEPATH));
+            FileWriter myWriter = new FileWriter(String.valueOf(this.filePath));
             myWriter.write(String.valueOf(str));
             myWriter.close();
         } catch (IOException e) {

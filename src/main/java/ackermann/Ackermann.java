@@ -23,10 +23,11 @@ public class Ackermann {
      * @param filePath filepath of saved tasks
      */
     public Ackermann(Path filePath) {
+        assert filePath != null : "FilePath is null";
         this.storage = new Storage(filePath);
 
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = storage.load();
             this.ui = new Ui(this.tasks);
         } catch (CheckedException e) {
             ui.showLoadingError();
@@ -34,6 +35,11 @@ public class Ackermann {
         }
     }
 
+    /**
+     * Gets a response for GUI to output
+     * @param input Query for bot to process
+     * @return A string for GUI to output
+     */
     public String getResponse(String input) {
         Parser parser = new Parser(this.tasks);
 
