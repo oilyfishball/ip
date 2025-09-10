@@ -1,5 +1,14 @@
 package ackermann.functions;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
@@ -11,25 +20,14 @@ import ackermann.task.Events;
 import ackermann.task.Task;
 import ackermann.task.ToDos;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 /**
  * Class to interact with saved tasks
  */
 public class Storage {
-    public final Path FILEPATH ;
+    public final Path filePath;
 
     public Storage(Path filepath) {
-        this.FILEPATH = filepath;
+        this.filePath = filepath;
     }
 
     /**
@@ -39,7 +37,7 @@ public class Storage {
      */
     public TaskList load() throws CheckedException {
         try {
-            Scanner fileIn = new Scanner(new File(String.valueOf(this.FILEPATH)));
+            Scanner fileIn = new Scanner(new File(String.valueOf(this.filePath)));
             TaskList tasks = new TaskList();
 
             loadTasks(fileIn, tasks);
@@ -55,7 +53,7 @@ public class Storage {
      * @return empty task list
      */
     private TaskList createNewFile() {
-        File newFile = new File(String.valueOf(this.FILEPATH));
+        File newFile = new File(String.valueOf(this.filePath));
         try {
             boolean success = newFile.createNewFile();
         } catch (IOException ex) {
@@ -185,7 +183,7 @@ public class Storage {
             }
         }
         try {
-            FileWriter myWriter = new FileWriter(String.valueOf(this.FILEPATH));
+            FileWriter myWriter = new FileWriter(String.valueOf(this.filePath));
             myWriter.write(String.valueOf(str));
             myWriter.close();
         } catch (IOException e) {

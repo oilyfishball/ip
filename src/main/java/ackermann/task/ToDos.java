@@ -1,5 +1,8 @@
 package ackermann.task;
 
+/**
+ * Class to create toDo object
+ */
 public class ToDos extends Task {
     /**
      * Constructor for toDo task
