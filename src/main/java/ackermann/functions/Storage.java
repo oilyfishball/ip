@@ -28,6 +28,10 @@ import java.util.Scanner;
 public class Storage {
     public final Path FILEPATH ;
 
+    /**
+     * Constructor for Storage
+     * @param filepath
+     */
     public Storage(Path filepath) {
         this.FILEPATH = filepath;
     }
@@ -40,6 +44,7 @@ public class Storage {
     public List<Task> load() throws CheckedException {
         try {
             Scanner fileIn = new Scanner(new File(String.valueOf(this.FILEPATH)));
+            assert fileIn != null : "File not found";
             List<Task> tasks = new ArrayList<>();
             assert fileIn != null : "No file not handled";
 
@@ -49,6 +54,8 @@ public class Storage {
                 String type = taskStr[0];
                 boolean status = taskStr[1].equals("1");
                 String value = taskStr[2];
+                assert !type.isEmpty() : "type of task is empty";
+                assert !value.isEmpty() : "value of task is empty";
 
                 switch (type) {
                 case "T":
