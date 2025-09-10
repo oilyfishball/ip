@@ -2,6 +2,7 @@ package ackermann.functions;
 
 import static java.lang.Integer.parseInt;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -13,6 +14,7 @@ import ackermann.codewords.EventCodeword;
 import ackermann.codewords.FindCodeword;
 import ackermann.codewords.ListCodeword;
 import ackermann.codewords.MarkCodeword;
+import ackermann.codewords.TagCodeword;
 import ackermann.codewords.TodoCodeword;
 import ackermann.codewords.UnmarkCodeword;
 import ackermann.exceptions.CheckedException;
@@ -20,6 +22,7 @@ import ackermann.exceptions.InvalidCodeException;
 import ackermann.exceptions.InvalidDeleteException;
 import ackermann.exceptions.InvalidFindException;
 import ackermann.exceptions.InvalidMarkException;
+import ackermann.exceptions.InvalidTagException;
 import ackermann.exceptions.InvalidTargetException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineException;
@@ -33,7 +36,7 @@ import ackermann.exceptions.task.InvalidTodo.InvalidTodoException;
  */
 public class Parser {
     private enum Codewords {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND;
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, TAG;
 
         public static Parser.Codewords check(String x) throws InvalidCodeException {
             try {
@@ -78,22 +81,29 @@ public class Parser {
             case TODO -> this.addToDo(this.tasks, words);
             case DEADLINE -> this.addDeadline(this.tasks, words);
             case EVENT -> this.addEvent(this.tasks, words);
-            case FIND -> this.find(tasks, words);
+            case FIND -> this.find(this.tasks, words);
+            case TAG -> this.handleTag(words);
             default -> throw new InvalidCodeException();
         };
     }
 
     /**
-     * Handles logic for deleting
-     * @param words mark and target
+     * Tags a task
+     * @param words In form of codeword, index, tag name
+     * @return
      * @throws CheckedException
      */
-    private String handleDelete(String[] words) throws CheckedException {
+    private String handleTag(String[] words) throws CheckedException {
         try {
-            int target = parseInt(words[1]);
-            return this.delete(tasks, target);
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new InvalidDeleteException();
+            if (words.length == 1 || words[1].isEmpty()) {
+                throw new InvalidTagException();
+            }
+            String[] newWords = words[1].split(" ");
+
+            Codeword codeword = new TagCodeword(this.tasks, newWords);
+            return codeword.execute();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidTagException();
         }
     }
 
@@ -155,25 +165,19 @@ public class Parser {
     }
 
     /**
-     * Deletes a task from list
-     *
-     * @param tasks List to delete task from.
-     * @param i     Key to find task.
-     * @throws InvalidTargetException
+     * Handles logic for deleting
+     * @param words mark and target
+     * @throws CheckedException
      */
-    public String delete(TaskList tasks, int i) throws CheckedException {
-        int id = i - 1;
-        Codeword codeword = new DeleteCodeword(tasks, id);
-        return codeword.execute();
-    }
-
-    /**
-     * Prints number of remaining tasks
-     *
-     * @param tasks Tasklist to print
-     */
-    public String printRemaining(TaskList tasks) {
-        return "Now you have " + tasks.size() + " tasks in the list.";
+    private String handleDelete(String[] words) throws CheckedException {
+        try {
+            int target = parseInt(words[1]);
+            int id = target - 1;
+            Codeword codeword = new DeleteCodeword(tasks, id);
+            return codeword.execute();
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidDeleteException();
+        }
     }
 
     /**

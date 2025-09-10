@@ -1,0 +1,1 @@
+Asked claude.ai on how can I include a space between image and text for gui.

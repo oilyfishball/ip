@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 import ackermann.exceptions.CheckedException;
@@ -79,16 +80,23 @@ public class Storage {
             String type = taskStr[0];
             boolean status = taskStr[1].equals("1");
             String value = taskStr[2];
+            String tagString = taskStr[3];
+            String[] tags;
+            if (!tagString.isEmpty()) {
+                tags = tagString.split(" ");
+            } else {
+                tags = new String[0];
+            }
 
             switch (type) {
             case "T":
-                addToDo(tasks, value, status);
+                addToDo(tasks, value, status, tags);
                 break;
             case "D":
-                addDeadline(tasks, value, status);
+                addDeadline(tasks, value, status, tags);
                 break;
             case "E":
-                addEvent(tasks, value, status);
+                addEvent(tasks, value, status, tags);
                 break;
             default:
                 throw new InvalidCodeException();
@@ -103,12 +111,15 @@ public class Storage {
      * @param value Name of the task.
      * @param status Checks if the task is completed.
      */
-    private void addToDo(TaskList tasks, String value, boolean status) {
+    private void addToDo(TaskList tasks, String value, boolean status, String[] tags) {
         Task tempToDo = new ToDos(value);
         if (status) {
             tempToDo.markAsDone();
         }
         tasks.add(tempToDo);
+        for (String tag : tags) {
+            tempToDo.tag(tag);
+        }
     }
 
     /**
@@ -119,7 +130,7 @@ public class Storage {
      *              Takes on the form "something /by something".
      * @param status Checks if the task is completed.
      */
-    private void addDeadline(TaskList tasks, String value, boolean status) throws InvalidDeadlineByException {
+    private void addDeadline(TaskList tasks, String value, boolean status, String[] tags) throws InvalidDeadlineByException {
         String[] deadlineInfo = value.split("/by ", 2);
         if (deadlineInfo.length < 2) {
             throw new InvalidDeadlineByException();
@@ -133,6 +144,9 @@ public class Storage {
                 tempDeadline.markAsDone();
             }
             tasks.add(tempDeadline);
+            for (String tag : tags) {
+                tempDeadline.tag(tag);
+            }
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
         }
@@ -146,7 +160,7 @@ public class Storage {
      *              Takes on the form "something /from something /to something".
      * @param status Checks if the task is completed.
      */
-    private void addEvent(TaskList tasks, String value, boolean status) throws InvalidEventException {
+    private void addEvent(TaskList tasks, String value, boolean status, String[] tags) throws InvalidEventException {
         String[] eventInfo1 = value.split("/from ", 2);
         if (eventInfo1.length < 2) {
             throw new InvalidEventFromException();
@@ -163,7 +177,9 @@ public class Storage {
                 tempEvent.markAsDone();
             }
             tasks.add(tempEvent);
-
+            for (String tag : tags) {
+                tempEvent.tag(tag);
+            }
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date!\nFollow the format 'YYYY-MM-DD'.");
         }
@@ -204,7 +220,7 @@ public class Storage {
         String tempStr = "";
 
         if (status) {
-            tempStr += " | 1 | " + currTask.getName();
+            tempStr += " | 1 | " + currTask.getName() + " | ";
         } else {
             tempStr += " | 0 | " + currTask.getName();
         }
@@ -215,6 +231,12 @@ public class Storage {
             tempStr = "E" + tempStr + "/from " + tempTask.getSaveFrom() + " /to " + tempTask.getSaveTo();
         } else if (currTask instanceof Deadlines tempTask) {
             tempStr = "D" + tempStr + "/by " + tempTask.getSaveBy();
+        }
+
+        tempStr += " |";
+        List<String> tags = currTask.getTags();
+        for (int i = 0; i < tags.size(); i++) {
+            tempStr += " " + tags.get(i);
         }
         return tempStr;
     }

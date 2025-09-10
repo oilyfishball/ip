@@ -57,6 +57,17 @@ public class TaskList {
     }
 
     /**
+     * For tagging
+     * @param idx
+     * @param tag
+     */
+    public void tag(int idx, String tag) {
+        this.tasks
+                .get(idx)
+                .tag(tag);
+    }
+
+    /**
      * Deletes a task from the list
      * @param id Key to access the task to delete
      */

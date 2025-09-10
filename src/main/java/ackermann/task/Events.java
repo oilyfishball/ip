@@ -25,7 +25,16 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + this.getFrom() + " to: " + this.getTo() + ")";
+        return String.valueOf(
+                new StringBuilder()
+                        .append("[E]")
+                        .append(super.toString())
+                        .append("(from: ")
+                        .append(this.getFrom())
+                        .append(" to: ")
+                        .append(this.getTo())
+                        .append(") ")
+                        .append(super.getTags()));
     }
 
     /**

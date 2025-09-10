@@ -11,7 +11,7 @@ public class MarkCodeword extends Codeword {
     private int id;
 
     /**
-     * Constructor for MarkCodeword
+     * Constructor for TagCodeword
      * @param tasks tasks that contain task to mark
      * @param id id of task to mark
      */
