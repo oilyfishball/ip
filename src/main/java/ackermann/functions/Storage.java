@@ -75,12 +75,15 @@ public class Storage {
     private void loadTasks(Scanner fileIn, TaskList tasks) throws CheckedException {
         while (fileIn.hasNext()) {
             String next = fileIn.nextLine();
-            //scans next line
             String[] taskStr = next.split(" \\| ");
             String type = taskStr[0];
             boolean status = taskStr[1].equals("1");
             String value = taskStr[2];
-            String tagString = taskStr[3];
+            String tagString = "";
+            if (taskStr.length > 3) {
+                tagString = taskStr[3];
+            }
+
             String[] tags;
             if (!tagString.isEmpty()) {
                 tags = tagString.split(" ");
