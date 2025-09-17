@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Class to create Event object
  */
-public class Events extends Task {
+public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
 
@@ -17,7 +17,7 @@ public class Events extends Task {
      * @param from start date
      * @param to end date
      */
-    public Events(String name, LocalDate from, LocalDate to) {
+    public Event(String name, LocalDate from, LocalDate to) {
         super(name);
         this.from = from;
         this.to = to;

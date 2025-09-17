@@ -2,7 +2,7 @@ package ackermann.codewords;
 
 import ackermann.functions.TaskList;
 import ackermann.task.Task;
-import ackermann.task.ToDos;
+import ackermann.task.ToDo;
 
 /**
  * Handles Todo Codeword
@@ -24,7 +24,7 @@ public class TodoCodeword extends Codeword {
     @Override
     public String execute() {
         StringBuilder output = new StringBuilder();
-        Task toDo = new ToDos(this.name);
+        Task toDo = new ToDo(this.name);
         this.tasks.add(toDo);
         return String.valueOf(
                 output.append("Got it bro. I've added this ToDo:\n")

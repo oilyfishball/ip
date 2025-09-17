@@ -3,7 +3,7 @@ package ackermann.codewords;
 import java.time.LocalDate;
 
 import ackermann.functions.TaskList;
-import ackermann.task.Deadlines;
+import ackermann.task.Deadline;
 import ackermann.task.Task;
 
 /**
@@ -29,7 +29,7 @@ public class DeadlineCodeword extends Codeword {
     @Override
     public String execute() {
         StringBuilder string = new StringBuilder();
-        Task deadline = new Deadlines(this.name, this.by);
+        Task deadline = new Deadline(this.name, this.by);
         this.tasks.add(deadline);
         return String.valueOf(string
                 .append("Can bro. I've added this Deadline:\n")

@@ -3,7 +3,7 @@ package ackermann.codewords;
 import java.time.LocalDate;
 
 import ackermann.functions.TaskList;
-import ackermann.task.Events;
+import ackermann.task.Event;
 import ackermann.task.Task;
 
 /**
@@ -32,7 +32,7 @@ public class EventCodeword extends Codeword {
     @Override
     public String execute() {
         StringBuilder string = new StringBuilder();
-        Task event = new Events(name, from, to);
+        Task event = new Event(name, from, to);
         this.tasks.add(event);
         return String.valueOf(string
                 .append("Roger bro. I've added this Event:\n")

@@ -16,10 +16,10 @@ import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventFromException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventToException;
-import ackermann.task.Deadlines;
-import ackermann.task.Events;
+import ackermann.task.Deadline;
+import ackermann.task.Event;
 import ackermann.task.Task;
-import ackermann.task.ToDos;
+import ackermann.task.ToDo;
 
 /**
  * Class to interact with saved tasks
@@ -112,7 +112,7 @@ public class Storage {
      * @param status Checks if the task is completed.
      */
     private void addToDo(TaskList tasks, String value, boolean status, String[] tags) {
-        Task tempToDo = new ToDos(value);
+        Task tempToDo = new ToDo(value);
         if (status) {
             tempToDo.markAsDone();
         }
@@ -139,7 +139,7 @@ public class Storage {
         try {
             String name = deadlineInfo[0];
             LocalDate by = LocalDate.parse(deadlineInfo[1]);
-            Task tempDeadline = new Deadlines(name, by);
+            Task tempDeadline = new Deadline(name, by);
             if (status) {
                 tempDeadline.markAsDone();
             }
@@ -172,7 +172,7 @@ public class Storage {
         try {
             LocalDate from = LocalDate.parse(eventInfo2[0]);
             LocalDate to = LocalDate.parse(eventInfo2[1]);
-            Task tempEvent = new Events(eventInfo1[0], from, to);
+            Task tempEvent = new Event(eventInfo1[0], from, to);
             if (status) {
                 tempEvent.markAsDone();
             }
@@ -225,16 +225,19 @@ public class Storage {
             tempStr += " | 0 | " + currTask.getName();
         }
 
-        if (currTask instanceof ToDos) {
+        if (currTask instanceof ToDo) {
             tempStr = "T" + tempStr;
-        } else if (currTask instanceof Events tempTask) {
+        } else if (currTask instanceof Event tempTask) {
             tempStr = "E" + tempStr + "/from " + tempTask.getSaveFrom() + " /to " + tempTask.getSaveTo();
-        } else if (currTask instanceof Deadlines tempTask) {
+        } else if (currTask instanceof Deadline tempTask) {
             tempStr = "D" + tempStr + "/by " + tempTask.getSaveBy();
         }
 
         tempStr += " |";
         List<String> tags = currTask.getTags();
+        if (tags.size() == 0) {
+            tempStr += "  ";
+        }
         for (int i = 0; i < tags.size(); i++) {
             tempStr += " " + tags.get(i);
         }

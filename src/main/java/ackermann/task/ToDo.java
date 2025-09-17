@@ -3,12 +3,12 @@ package ackermann.task;
 /**
  * Class to create toDo object
  */
-public class ToDos extends Task {
+public class ToDo extends Task {
     /**
      * Constructor for toDo task
      * @param name Name of task
      */
-    public ToDos(String name) {
+    public ToDo(String name) {
         super(name);
     }
 

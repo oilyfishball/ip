@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Class to create Deadline object
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
     private LocalDate by;
 
     /**
@@ -14,7 +14,7 @@ public class Deadlines extends Task {
      * @param name Name of task
      * @param by Deadline of task
      */
-    public Deadlines(String name, LocalDate by) {
+    public Deadline(String name, LocalDate by) {
         super(name);
         this.by = by;
     }
