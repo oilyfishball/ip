@@ -28,7 +28,7 @@ public class DeleteCodeword extends Codeword {
             Task tempTask = this.tasks.get(this.id);
             tasks.delete(id);
 
-            stringBuilder.append("Noted, I've removed this task:")
+            stringBuilder.append("Ok bro, I've removed this task:")
                     .append("\n")
                     .append(tempTask.toString())
                     .append("\n")

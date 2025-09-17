@@ -27,7 +27,7 @@ public class TodoCodeword extends Codeword {
         Task toDo = new ToDos(this.name);
         this.tasks.add(toDo);
         return String.valueOf(
-                output.append("Got it. I've added this ToDo:\n")
+                output.append("Got it bro. I've added this ToDo:\n")
                         .append(toDo)
                         .append("\nNow you have ")
                         .append(this.tasks.size())

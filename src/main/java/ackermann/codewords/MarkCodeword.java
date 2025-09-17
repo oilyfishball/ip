@@ -24,7 +24,7 @@ public class MarkCodeword extends Codeword {
     public String execute() throws InvalidTargetException {
         try {
             this.tasks.get(this.id).markAsDone();
-            return "Nice! I've marked this task as done:\n" + this.tasks.get(id).toString();
+            return "Nice one bro! I've marked this task as done:\n" + this.tasks.get(id).toString();
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTargetException();
         }

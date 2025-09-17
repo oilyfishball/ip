@@ -23,7 +23,7 @@ public class ListCodeword extends Codeword {
     @Override
     public String execute() {
         StringBuilder str = new StringBuilder();
-        str.append("Here are the tasks in your list:").append("\n");
+        str.append("Here are the tasks in your list bro:").append("\n");
 
         for (int i = 0; i < this.tasks.size(); i++) {
             int curr = i + 1;

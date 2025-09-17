@@ -33,7 +33,7 @@ public class FindCodeword extends Codeword {
         List<Task> results = new ArrayList<>();
         StringBuilder output = new StringBuilder();
 
-        output.append("Here are the matching tasks in your list:\n");
+        output.append("Ok bro, I've helped you to search and here are the matching tasks in your list:\n");
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = tasks.get(i);
 

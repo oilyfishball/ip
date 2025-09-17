@@ -35,7 +35,7 @@ public class EventCodeword extends Codeword {
         Task event = new Events(name, from, to);
         this.tasks.add(event);
         return String.valueOf(string
-                .append("Got it. I've added this Event:\n")
+                .append("Roger bro. I've added this Event:\n")
                 .append(event).append("\nNow you have ")
                 .append(this.tasks.size())
                 .append(" tasks in the list.").toString());

@@ -32,7 +32,7 @@ public class DeadlineCodeword extends Codeword {
         Task deadline = new Deadlines(this.name, this.by);
         this.tasks.add(deadline);
         return String.valueOf(string
-                .append("Got it. I've added this Deadline:\n")
+                .append("Can bro. I've added this Deadline:\n")
                 .append(deadline).append("\nNow you have ")
                 .append(this.tasks.size())
                 .append(" tasks in the list.").toString());

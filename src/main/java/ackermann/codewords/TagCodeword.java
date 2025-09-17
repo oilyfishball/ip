@@ -12,8 +12,8 @@ public class TagCodeword extends Codeword {
 
     /**
      * Constructor for TagCodeword
-     * @param tasks tasks that contain task to mark
-     * @param id id of task to mark
+     * @param tasks Task list that contain task to mark
+     * @param newWords id and tag name
      */
     public TagCodeword(TaskList tasks, String[] newWords) {
         this.tasks = tasks;
@@ -24,7 +24,7 @@ public class TagCodeword extends Codeword {
     public String execute() throws CheckedException {
         int idx = Integer.parseInt(newWords[0]);
         String tag = newWords[1];
-        String output = "I have successfully tagged:\n";
+        String output = "Noted bro, I have successfully tagged:\n";
         this.tasks.tag(idx - 1, tag);
         return output + this.tasks.get(idx - 1);
     }
