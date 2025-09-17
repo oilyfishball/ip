@@ -2,6 +2,9 @@ package ackermann.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import ackermann.exceptions.task.InvalidEvent.InvalidEventDatesException;
 
 
 /**
@@ -17,14 +20,18 @@ public class Event extends Task {
      * @param from start date
      * @param to end date
      */
-    public Event(String name, LocalDate from, LocalDate to) {
+    public Event(String name, LocalDate from, LocalDate to) throws InvalidEventDatesException {
         super(name);
+        if (to.isBefore(from)) {
+            throw new InvalidEventDatesException();
+        }
         this.from = from;
         this.to = to;
     }
 
     @Override
     public String toString() {
+        List<String> tags = super.getTags();
         return String.valueOf(
                 new StringBuilder()
                         .append("[E]")
@@ -34,7 +41,7 @@ public class Event extends Task {
                         .append(" to: ")
                         .append(this.getTo())
                         .append(") ")
-                        .append(super.getTags()));
+                        .append(tags.isEmpty() ? "[ ]" : tags.toString()));
     }
 
     /**

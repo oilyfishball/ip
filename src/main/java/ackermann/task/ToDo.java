@@ -1,5 +1,7 @@
 package ackermann.task;
 
+import java.util.List;
+
 /**
  * Class to create toDo object
  */
@@ -14,6 +16,12 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() + " " + super.getTags();
+        List<String> tags = super.getTags();
+        return String.valueOf(new StringBuilder()
+                .append("[T]")
+                .append(super.toString())
+                .append(" ")
+                .append(tags.isEmpty() ? "[ ]" : tags)
+        );
     }
 }

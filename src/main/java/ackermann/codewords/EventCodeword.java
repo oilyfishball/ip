@@ -2,6 +2,7 @@ package ackermann.codewords;
 
 import java.time.LocalDate;
 
+import ackermann.exceptions.CheckedException;
 import ackermann.functions.TaskList;
 import ackermann.task.Event;
 import ackermann.task.Task;
@@ -30,7 +31,7 @@ public class EventCodeword extends Codeword {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws CheckedException {
         StringBuilder string = new StringBuilder();
         Task event = new Event(name, from, to);
         this.tasks.add(event);

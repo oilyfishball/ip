@@ -2,6 +2,7 @@ package ackermann.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Class to create Deadline object
@@ -21,7 +22,15 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by " + this.getBy() + ") " + super.getTags();
+        List<String> tags = super.getTags();
+        return String.valueOf(new StringBuilder()
+                .append("[D]")
+                .append(super.toString())
+                .append("(by ")
+                .append(this.getBy())
+                .append(") ")
+                .append(tags.isEmpty() ? "[ ]" : tags)
+        );
     }
 
     /**
