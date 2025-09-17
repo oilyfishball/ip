@@ -15,7 +15,7 @@ public class DeadlineCodeword extends Codeword {
     private LocalDate by;
 
     /**
-     * Constructor for DeleteCodeword
+     * Constructor for DeadlineCodeword
      * @param tasks task list to append
      * @param name name of task
      * @param by deadline

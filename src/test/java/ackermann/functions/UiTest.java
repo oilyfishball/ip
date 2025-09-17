@@ -1,4 +1,4 @@
-package ackermann.ui;
+package ackermann.functions;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
-import ackermann.functions.TaskList;
-import ackermann.functions.Ui;
 
 public class UiTest {
     @Test

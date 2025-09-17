@@ -9,5 +9,6 @@ Asked Gemini:
 - to generate a logo for the bot
 - to generate a styles.css script make scrollbar dark
 - on how to compare dates
+- to add more cases to test edge case for Parser for date input testing
 
 As part of A-AiAssisted
