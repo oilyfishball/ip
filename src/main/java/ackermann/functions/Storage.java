@@ -220,7 +220,7 @@ public class Storage {
         String tempStr = "";
 
         if (status) {
-            tempStr += " | 1 | " + currTask.getName() + " | ";
+            tempStr += " | 1 | " + currTask.getName();
         } else {
             tempStr += " | 0 | " + currTask.getName();
         }
