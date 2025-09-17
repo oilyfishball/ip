@@ -236,13 +236,14 @@ public class Storage {
             tempStr = "D" + tempStr + "/by " + tempTask.getSaveBy();
         }
 
-        tempStr += " |";
         List<String> tags = currTask.getTags();
         if (tags.size() == 0) {
             tempStr += "  ";
-        }
-        for (int i = 0; i < tags.size(); i++) {
-            tempStr += " " + tags.get(i);
+        } else {
+            tempStr += " |";
+            for (int i = 0; i < tags.size(); i++) {
+                tempStr += " " + tags.get(i);
+            }
         }
         return tempStr;
     }
