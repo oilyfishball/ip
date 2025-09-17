@@ -67,7 +67,7 @@ public class Storage {
     }
 
     /**
-     * Load all tasks from file to array
+     * Loads all tasks from file to array
      * @param fileIn
      * @param tasks
      * @throws CheckedException
@@ -214,7 +214,7 @@ public class Storage {
     }
 
     /**
-     * Used for save method to get the string to save to file
+     * Gets the string to save to file
      * @param currTask task to stringify
      * @return stringified task
      */
@@ -237,9 +237,7 @@ public class Storage {
         }
 
         List<String> tags = currTask.getTags();
-        if (tags.size() == 0) {
-            tempStr += "  ";
-        } else {
+        if (!tags.isEmpty()) {
             tempStr += " |";
             for (int i = 0; i < tags.size(); i++) {
                 tempStr += " " + tags.get(i);

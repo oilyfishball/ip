@@ -57,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * For tagging
+     * Tags a task
      * @param idx
      * @param tag
      */
