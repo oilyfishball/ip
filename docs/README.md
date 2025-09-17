@@ -19,6 +19,7 @@ java -jar "Ackermann.jar"
 - Add deadlines
 - Add toDos
 - Add events
+- List tasks
 - Find task
 - Delete task
 - Mark task as done/undone
@@ -66,6 +67,21 @@ Expected output:
 Roger bro. I've added this Event:
 [E][ ] something (from: Dec 2 2025 to: Dec 10 2025) [ ]
 Now you have X tasks in the list.
+```
+### List Tasks
+Lists all tasks in to-do list. 
+
+Search input string is case-insensitive.
+```declarative
+list
+```
+Example: `list`
+
+Expected output:
+```
+Here are the tasks in your list bro:
+1. [T][X] test [ ]
+2. [E][ ] test2 (from: Dec 12 2025 to: Dec 15 2025) [ ]
 ```
 
 ### Find Task
