@@ -3,13 +3,11 @@ package ackermann.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import ackermann.exceptions.task.EmptyNameException;
-
 /**
  * Superclass for all Task objects
  */
 public class Task {
-    private boolean isDone;
+    private boolean done;
     private String name;
     private List<String> tags;
 
@@ -17,29 +15,26 @@ public class Task {
      * Constructor for Task
      * @param name
      */
-    public Task(String name) throws EmptyNameException {
-        if (name.trim().isEmpty()) {
-            throw new EmptyNameException();
-        }
-        this.isDone = false;
+    public Task(String name) {
+        this.done = false;
         this.name = name;
         this.tags = new ArrayList<>();
     }
 
     /**
      * Formats boolean flag to string
-     * @return X if isDone " " if undone
+     * @return X if done " " if undone
      */
     public String getStatus() {
-        return isDone ? "X" : " ";
+        return done ? "X" : " ";
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        this.done = true;
     }
 
     public void markAsUndone() {
-        this.isDone = false;
+        this.done = false;
     }
 
     public String getName() {
