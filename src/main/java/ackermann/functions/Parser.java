@@ -207,11 +207,12 @@ public class Parser {
             throw new InvalidDeadlineException();
         }
         String input = words[1];
-        String[] info = input.split("/by ", 2);
+        String[] info = input.split(" /by ", 2);
         if (info.length < 2) {
             throw new InvalidDeadlineByException();
         }
         try {
+            System.out.println(info[0]);
             LocalDate date = LocalDate.parse(info[1]);
             Codeword codeword = new DeadlineCodeword(tasks, info[0], date);
             return codeword.execute();
@@ -232,7 +233,7 @@ public class Parser {
             throw new InvalidEventException();
         }
         String input = words[1];
-        String[] info = input.split("/from ", 2);
+        String[] info = input.split(" /from ", 2);
         if (info.length < 2) {
             throw new InvalidEventFromException();
         }

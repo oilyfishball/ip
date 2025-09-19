@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import ackermann.exceptions.task.EmptyNameException;
+
 /**
  * Class to create Deadline object
  */
@@ -15,7 +17,7 @@ public class Deadline extends Task {
      * @param name Name of task
      * @param by Deadline of task
      */
-    public Deadline(String name, LocalDate by) {
+    public Deadline(String name, LocalDate by) throws EmptyNameException {
         super(name);
         this.by = by;
     }
@@ -26,7 +28,7 @@ public class Deadline extends Task {
         return String.valueOf(new StringBuilder()
                 .append("[D]")
                 .append(super.toString())
-                .append("(by ")
+                .append(" (by ")
                 .append(this.getBy())
                 .append(") ")
                 .append(tags.isEmpty() ? "[ ]" : tags)

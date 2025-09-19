@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import ackermann.exceptions.CheckedException;
 import ackermann.exceptions.InvalidCodeException;
+import ackermann.exceptions.task.EmptyNameException;
 import ackermann.exceptions.task.InvalidDeadline.InvalidDeadlineByException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventFromException;
@@ -67,7 +68,7 @@ public class Storage {
     }
 
     /**
-     * Load all tasks from file to array
+     * Loads all tasks from file to array
      * @param fileIn
      * @param tasks
      * @throws CheckedException
@@ -114,7 +115,7 @@ public class Storage {
      * @param value Name of the task.
      * @param status Checks if the task is completed.
      */
-    private void addToDo(TaskList tasks, String value, boolean status, String[] tags) {
+    private void addToDo(TaskList tasks, String value, boolean status, String[] tags) throws EmptyNameException {
         Task tempToDo = new ToDo(value);
         if (status) {
             tempToDo.markAsDone();
@@ -133,7 +134,8 @@ public class Storage {
      *              Takes on the form "something /by something".
      * @param status Checks if the task is completed.
      */
-    private void addDeadline(TaskList tasks, String value, boolean status, String[] tags) throws InvalidDeadlineByException {
+    private void addDeadline(TaskList tasks, String value, boolean status, String[] tags)
+            throws InvalidDeadlineByException, EmptyNameException {
         String[] deadlineInfo = value.split("/by ", 2);
         if (deadlineInfo.length < 2) {
             throw new InvalidDeadlineByException();
@@ -163,7 +165,8 @@ public class Storage {
      *              Takes on the form "something /from something /to something".
      * @param status Checks if the task is completed.
      */
-    private void addEvent(TaskList tasks, String value, boolean status, String[] tags) throws InvalidEventException {
+    private void addEvent(TaskList tasks, String value, boolean status, String[] tags)
+            throws InvalidEventException, EmptyNameException {
         String[] eventInfo1 = value.split("/from ", 2);
         if (eventInfo1.length < 2) {
             throw new InvalidEventFromException();
@@ -214,7 +217,7 @@ public class Storage {
     }
 
     /**
-     * Used for save method to get the string to save to file
+     * Gets the string to save to file
      * @param currTask task to stringify
      * @return stringified task
      */
@@ -237,9 +240,7 @@ public class Storage {
         }
 
         List<String> tags = currTask.getTags();
-        if (tags.size() == 0) {
-            tempStr += "  ";
-        } else {
+        if (!tags.isEmpty()) {
             tempStr += " |";
             for (int i = 0; i < tags.size(); i++) {
                 tempStr += " " + tags.get(i);

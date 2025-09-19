@@ -1,5 +1,6 @@
 package ackermann.codewords;
 
+import ackermann.exceptions.task.EmptyNameException;
 import ackermann.functions.TaskList;
 import ackermann.task.Task;
 import ackermann.task.ToDo;
@@ -22,7 +23,7 @@ public class TodoCodeword extends Codeword {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws EmptyNameException {
         StringBuilder output = new StringBuilder();
         Task toDo = new ToDo(this.name);
         this.tasks.add(toDo);

@@ -2,6 +2,9 @@ package ackermann.codewords;
 
 import java.time.LocalDate;
 
+import javax.naming.InvalidNameException;
+
+import ackermann.exceptions.task.EmptyNameException;
 import ackermann.functions.TaskList;
 import ackermann.task.Deadline;
 import ackermann.task.Task;
@@ -27,13 +30,14 @@ public class DeadlineCodeword extends Codeword {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws EmptyNameException {
         StringBuilder string = new StringBuilder();
         Task deadline = new Deadline(this.name, this.by);
         this.tasks.add(deadline);
         return String.valueOf(string
                 .append("Can bro. I've added this Deadline:\n")
-                .append(deadline).append("\nNow you have ")
+                .append(deadline)
+                .append("\nNow you have ")
                 .append(this.tasks.size())
                 .append(" tasks in the list.").toString());
     }

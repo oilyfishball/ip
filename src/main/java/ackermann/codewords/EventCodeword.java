@@ -2,6 +2,8 @@ package ackermann.codewords;
 
 import java.time.LocalDate;
 
+import javax.naming.InvalidNameException;
+
 import ackermann.exceptions.CheckedException;
 import ackermann.functions.TaskList;
 import ackermann.task.Event;

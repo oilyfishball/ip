@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import ackermann.exceptions.task.EmptyNameException;
 import ackermann.exceptions.task.InvalidEvent.InvalidEventDatesException;
-
 
 /**
  * Class to create Event object
@@ -20,7 +20,7 @@ public class Event extends Task {
      * @param from start date
      * @param to end date
      */
-    public Event(String name, LocalDate from, LocalDate to) throws InvalidEventDatesException {
+    public Event(String name, LocalDate from, LocalDate to) throws InvalidEventDatesException, EmptyNameException {
         super(name);
         if (to.isBefore(from)) {
             throw new InvalidEventDatesException();
@@ -36,7 +36,7 @@ public class Event extends Task {
                 new StringBuilder()
                         .append("[E]")
                         .append(super.toString())
-                        .append("(from: ")
+                        .append(" (from: ")
                         .append(this.getFrom())
                         .append(" to: ")
                         .append(this.getTo())
