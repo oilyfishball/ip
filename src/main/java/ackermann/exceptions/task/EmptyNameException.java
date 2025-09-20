@@ -5,6 +5,6 @@ package ackermann.exceptions.task;
  */
 public class EmptyNameException extends InvalidTaskException {
     public EmptyNameException() {
-        super("Name cannot be empty!");
+        super("Name cannot be empty or blanks!");
     }
 }

@@ -1,6 +1,7 @@
 package ackermann.codewords;
 
 import ackermann.exceptions.CheckedException;
+import ackermann.exceptions.InvalidTagTargetException;
 import ackermann.functions.TaskList;
 
 /**
@@ -22,10 +23,22 @@ public class TagCodeword extends Codeword {
 
     @Override
     public String execute() throws CheckedException {
-        int idx = Integer.parseInt(newWords[0]);
+        int idx = tryParse(newWords[0]);
         String tag = newWords[1];
         String output = "Noted bro, I have successfully tagged:\n";
-        this.tasks.tag(idx - 1, tag);
-        return output + this.tasks.get(idx - 1);
+        try {
+            this.tasks.tag(idx - 1, tag);
+            return output + this.tasks.get(idx - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTagTargetException();
+        }
+    }
+
+    private int tryParse(String id) throws InvalidTagTargetException {
+        try {
+            return Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new InvalidTagTargetException();
+        }
     }
 }

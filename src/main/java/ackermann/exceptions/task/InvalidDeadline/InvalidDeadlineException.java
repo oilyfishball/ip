@@ -8,7 +8,7 @@ import ackermann.exceptions.task.InvalidTaskException;
 public class InvalidDeadlineException extends InvalidTaskException {
     //0 is no space, 1 is no /by
     public InvalidDeadlineException() {
-        super("Invalid Deadline Input!");
+        super("Invalid Deadline Input!\nE.g. deadline project meeting /by 2025-12-01");
     }
 
     public InvalidDeadlineException(String message) {
